@@ -1,0 +1,13 @@
+# Copias de lugares de Roblox: nunca al repo (ver AGENTS.md)
+*.rbxl
+*.rbxlx
+*.rbxm
+*.rbxmx.bak
+
+# Herramientas y sistema
+.DS_Store
+Thumbs.db
+node_modules/
+.env
+*.log
+.venv*/
