@@ -9,3 +9,7 @@
 - **Por qué:** en oaxacos la mayoría de las fases quedaron con pendientes de prueba manual ("faltan dos clientes, celular y API"). Un criterio claro evita arrastrar pendientes.
 - **Qué:** no se guardan archivos `.rbxl`/`.rbxlx` en el repo (ver `.gitignore`).
 - **Por qué:** cada copia de lugar aparece en la lista de experiencias y confunde.
+
+## 2026-11-26 · [claude] · Commits directos a main
+- **Qué:** se trabaja directo en `main`, sin ramas por fase ni Pull Requests. Cada commit debe dejar el juego sin romper.
+- **Por qué:** la persona dueña del proyecto lo trabaja sola y prefiere avanzar sin pasos de Git extra. El control de calidad sigue en las validaciones rápidas y en la prueba manual anotada en `ESTADO.md`.

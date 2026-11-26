@@ -64,14 +64,14 @@ Cada fase de `ESTADO.md` debe tener una frase de criterio, por ejemplo: "Un juga
 
 2. Actualiza `docs/ESTADO.md` (fase actual, checklist, problemas conocidos, siguiente paso).
 3. Si cambió la estructura del proyecto, regenera el grafo (graphify) y confirma que `graphify-out/` quedó actualizado.
-4. `git add`, `git commit` con prefijo `[claude]` o `[codex]` y `git push`.
+4. `git add`, `git commit` con prefijo `[claude]` o `[codex]` y `git push origin main`.
 
-## Ramas y commits
+## Commits
 
-- Nadie trabaja directo en `main`. Cada fase tiene su rama: `fase-N-tema` (por ejemplo `fase-1-inventario`).
-- Al terminar la fase: sube la rama, abre un Pull Request a `main` y, si las validaciones rápidas pasan, júntalo y borra la rama.
+- Se trabaja directo en `main`, sin ramas ni Pull Requests.
+- Un commit por cambio pequeño y completo. Nunca subas un commit que deje el juego roto: si una validación falla, corrígela antes de commitear.
 - Prefijo del commit con la IA que lo hizo: `[claude]`, `[codex]`, etc.
-- Si no puedes abrir el PR (sin `gh` o sin acceso), deja la rama subida, anótalo en la bitácora y avisa a la persona dueña.
+- Antes de cerrar una fase, la última entrada de la bitácora debe decir la fecha, qué se probó y qué falta.
 
 ## Reglas para no pisarnos
 
