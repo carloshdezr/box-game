@@ -1,0 +1,16 @@
+return {
+	Background = Color3.fromRGB(25, 29, 40),
+	Text = Color3.fromRGB(245, 247, 255),
+	Accent = Color3.fromRGB(255, 204, 70),
+	Warning = Color3.fromRGB(255, 160, 140),
+	Font = Enum.Font.Gotham,
+	TitleFont = Enum.Font.GothamBold,
+	TextSize = 16,
+	TitleSize = 19,
+	PanelWidth = 300,
+	Margin = 12,
+	Padding = 14,
+	RowHeight = 26,
+	WarningHeight = 48,
+	CornerRadius = 10,
+}

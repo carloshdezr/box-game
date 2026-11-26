@@ -18,13 +18,24 @@ Cada fase tiene su criterio de "terminado". No se pasa a la siguiente sin prueba
 Después de publicar (fuera de la v1): torneos, más rangos, cosméticos, monedas y tienda.
 
 ## Último en trabajar
-[claude] · 2026-11-26. Documento de diseño y fases.
+[codex] · 2026-11-26. Implementación de Fase 1; fase abierta hasta prueba manual.
+
+## Avance de Fase 1
+- [x] DataStore con UpdateAsync, autoguardado cada 60 segundos, salida y cierre del servidor.
+- [x] Bloqueo por sesión y rechazo de registros inválidos; carga fallida nunca guarda valores iniciales sobre datos existentes.
+- [x] Fuerza, Velocidad, Stamina y Defensa iniciales en 1; topes Novato 100, Amateur 250, Semi-pro 500 (aprobados por el dueño el 2026-11-26).
+- [x] Rango y puntos persistidos; atributos del jugador publicados por el servidor.
+- [x] HUD simple con tema central y aviso «Tu progreso no se está guardando».
+- [x] Validación rápida local con DataStore simulado y mapeo Rojo, sin crear archivos de lugar.
+- [ ] Prueba manual del dueño: persistencia real, salida/cierre, fallo de carga y HUD en PC/celular. Guía: `docs/PRUEBA_FASE_1.md`.
 
 ## Problemas conocidos
-- Ninguno todavía.
+- Studio solo tenía abierto «Place1», no «box-game pruebas»: no se tocó ni se probó otro lugar. Persistencia real y apariencia pendientes.
+- Graphify no disponible; instalación temporal interrumpida al atascarse la resolución de dependencias. `graphify-out/GRAPH_REPORT.md` contiene un mapa manual actualizado, no una extracción automática. Pendiente regenerarlo con Graphify.
+- El ejecutable `rojo` en PATH es un shim de Rokit sin manifiesto; el sourcemap pasó usando el binario instalado de Rojo 7.7.1 directamente.
 
 ## Siguiente paso
-Fase 1: guardar datos del jugador (4 stats, rango y puntos de rango) con DataStore y mostrarlos en una interfaz simple. Valores iniciales y topes en `src/ReplicatedStorage/Config/`.
+Abrir «box-game pruebas», sincronizar con Rojo y realizar la prueba de `docs/PRUEBA_FASE_1.md`. Anotar fecha y resultados aquí antes de cerrar Fase 1. Regenerar el grafo con Graphify cuando esté disponible. No iniciar Fase 2 todavía.
 
 ## Preguntas pendientes
 - Jugadores por servidor (provisional 12).

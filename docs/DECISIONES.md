@@ -1,5 +1,15 @@
 # Decisiones
 
+## 2026-11-26 · [codex] · Datos y stats de Fase 1
+- **Qué:** los 4 stats empiezan en 1; topes Novato 100, Amateur 250 y Semi-pro 500. El dueño eligió estos números explícitamente en esta sesión. Rango inicial Novato y puntos iniciales 0, sin ascensos implementados hasta Fase 4.
+- **Por qué:** concretar el balance inicial solicitado, manteniendo valores en `Config/Stats.lua`.
+- **Qué:** un registro versionado por UserId en `BoxPlayerData_v1`; adquisición y renovación de bloqueo de sesión dentro de UpdateAsync. Autoguardado cada 60 s, lease de 180 s, hasta 3 intentos separados por 2 s; cierre paralelo con espera máxima de 25 s. Parámetros en `Config/Persistence.lua`.
+- **Por qué:** evitar que una sesión anterior sobrescriba otra y mantener acotados los reintentos. Si falla la carga o el registro es incompatible, la sesión solo muestra valores iniciales y nunca los guarda. Una sesión ocupada requiere reconectar; un cierre abrupto puede requerir esperar a que venza el bloqueo.
+- **Qué:** los datos autoritativos viven en memoria del servidor; `SetStat` valida y limita valores; `GetSnapshot` devuelve una copia. Atributos `Fuerza`, `Velocidad`, `Stamina`, `Defensa`, `Rango`, `PuntosRango` y `EstadoDatos` son solo la vista replicada. No hay remotos para cambiar progreso.
+- **Por qué:** impedir que atributos alterados por un cliente decidan datos guardados. El HUD escucha cambios y todo el estilo está en `Config/Theme.lua`. Los errores de guardado también muestran el aviso hasta recuperarse.
+- **Referencia técnica:** bloqueo de sesión y UpdateAsync según [Roblox Creator Hub](https://create.roblox.com/docs/cloud-services/data-stores/player-data-purchasing).
+- **Validación:** simulación local aislada de servicios y scheduler con Fengari; no reemplaza Luau, API real ni prueba manual en Studio.
+
 ## 2026-11-26 · [claude] · Modo práctica y ForgeGUI
 - **Qué:** al publicar se queda un ring de práctica contra NPC que no da puntos de rango. El rango solo se sube con PvP. Aprobado por la persona dueña.
 - **Por qué:** con pocos jugadores conectados nadie se queda sin pelear, y el rango sigue siendo contra gente real.
