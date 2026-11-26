@@ -89,14 +89,15 @@ Cada estación es un minijuego corto (unos 15 a 30 segundos por ronda). Hacerlo 
 
 ## 9. NPC y PvP
 - **Durante el desarrollo:** se pelea contra boxeadores NPC en el ring, para que la persona dueña pueda practicar y probar solo. Cada rango tiene un rival NPC con estilo propio (uno pega duro, otro es muy rápido, otro se defiende mucho).
-- **Antes de publicar:** se quitan los NPC. En el juego publicado solo hay peleas entre jugadores reales.
+- **Antes de publicar:** los NPC dejan de dar puntos de rango. El rango solo se sube peleando contra jugadores reales.
+- **Modo práctica (se queda al publicar):** en el juego publicado hay un ring de práctica contra un NPC que **no da puntos de rango**. Sirve para aprender a pelear y para que nadie se quede sin hacer nada en un servidor con poca gente.
 - Por eso el código de pelea debe ser el mismo para NPC y jugador: el NPC solo "aprieta los botones" igual que un jugador, así al quitarlo no hay que rehacer nada.
 - **PvP:** un jugador reta a otro en el ring (o entra a una fila del ring) y pelean 1 contra 1. Los puntos de rango solo cuentan si los dos son de rangos parecidos, para que nadie suba molestando a novatos.
 
 ## 10. Estilo visual
 - Caricatura: colores vivos, personajes de Roblox normales con guantes y shorts, gym con ambiente divertido.
 - Gráficos, interfaz e imágenes con **ForgeGUI**.
-- Ojo: en el proyecto anterior el plan de ForgeGUI no incluía modelos 3D y se acababan los créditos. Si pasa aquí, los modelos del gym (saco, caminadora, pesas, ring) se hacen con bloques o del Creator Store gratis, y ForgeGUI se usa para interfaz, íconos y texturas.
+- Regla aprobada: si ForgeGUI no da modelos 3D o se acaban los créditos, los modelos del gym (saco, caminadora, pesas, ring) se hacen con bloques o se toman gratis del Creator Store (sin scripts), y ForgeGUI se usa para interfaz, íconos y texturas.
 - La interfaz va hasta el final (Fase 6): primero que todo funcione con una interfaz simple, luego se pone bonito. Todo el estilo sale de un solo módulo de tema, para cambiar el look en un solo lugar.
 
 ## 11. Alcance de la v1
@@ -106,7 +107,7 @@ Entra:
 - Ring con combate (5 movimientos, vida, stamina, rounds).
 - 3 rangos con tope de stats.
 - Peleas contra NPC para probar; PvP 1 contra 1 en el ring.
-- Antes de publicar: sin NPC, solo PvP.
+- Al publicar: rango solo por PvP y un ring de práctica contra NPC sin puntos.
 
 No entra en la v1 (ideas para después, aquí para no perderlas):
 - Modo torneo (eliminatoria de 4 u 8 jugadores cada cierto tiempo).
@@ -121,6 +122,5 @@ No entra en la v1 (ideas para después, aquí para no perderlas):
 No entra en la v1. Cuando entre, la idea es solo cosmética (guantes, shorts, entradas, efectos) y quizá un boost temporal de entrenamiento. Nada que haga ganar peleas por pagar.
 
 ## 13. Preguntas abiertas
-- Al quitar los NPC antes de publicar: si hay pocos jugadores conectados, alguien puede quedarse sin con quién pelear y sin poder subir de rango. ¿Se acepta ese riesgo o se deja algún modo de práctica sin puntos? (Decisión actual: solo PvP.)
 - Número máximo de jugadores por servidor (provisional: 12).
 - Nombre definitivo del juego.

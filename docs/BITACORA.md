@@ -1,5 +1,12 @@
 # Bitácora
 
+## 2026-11-26 16:36 · [claude] · Diseño
+- Qué hice: anoté dos decisiones aprobadas: ring de práctica contra NPC sin puntos de rango al publicar, y plan B de modelos si ForgeGUI no da 3D.
+- Archivos tocados: `docs/DISENO_JUEGO.md`, `docs/ESTADO.md`, `docs/DECISIONES.md`, `docs/BITACORA.md`.
+- Cómo probarlo: nada jugable todavía.
+- Qué quedó mal o pendiente: jugadores por servidor y nombre del juego.
+- Siguiente paso recomendado: Fase 1, datos y stats.
+
 ## 2026-11-26 16:30 · [claude] · Diseño
 - Qué hice: escribí el documento de diseño del juego de boxeo (stats, gym con minijuegos, combate, rangos, NPC solo para desarrollo, PvP, estilo caricatura con ForgeGUI, alcance de la v1) y armé las fases 1 a 7 con su criterio de terminado.
 - Archivos tocados: `docs/DISENO_JUEGO.md`, `docs/ESTADO.md`, `docs/DECISIONES.md`, `docs/BITACORA.md`, `src/ReplicatedStorage/Config/Game.lua`.

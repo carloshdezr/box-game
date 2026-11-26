@@ -1,5 +1,11 @@
 # Decisiones
 
+## 2026-11-26 · [claude] · Modo práctica y ForgeGUI
+- **Qué:** al publicar se queda un ring de práctica contra NPC que no da puntos de rango. El rango solo se sube con PvP. Aprobado por la persona dueña.
+- **Por qué:** con pocos jugadores conectados nadie se queda sin pelear, y el rango sigue siendo contra gente real.
+- **Qué:** si ForgeGUI no da modelos 3D o no hay créditos, los modelos se hacen con bloques o del Creator Store gratis (sin scripts); ForgeGUI queda para interfaz, íconos y texturas. Aprobado.
+- **Por qué:** en el proyecto anterior el plan de ForgeGUI no incluía modelos 3D y eso frenó el arte.
+
 ## 2026-11-26 · [claude] · Estructura del repo
 - **Qué:** repo en Git con Rojo para sincronizar `src/` a Studio. El código vive en el repo; Studio solo sirve para probar.
 - **Por qué:** en el proyecto de oaxacos, lo que se editaba directo en Studio se perdía o se desfasaba. Con el repo como fuente única, cualquier IA puede retomar el trabajo leyendo los archivos.

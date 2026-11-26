@@ -13,7 +13,7 @@ Cada fase tiene su criterio de "terminado". No se pasa a la siguiente sin prueba
 - [ ] **Fase 4: rangos y rivales.** Criterio: ganar peleas da puntos de rango; al juntar los puntos subes de Novato a Amateur y luego a Semi-pro; cada rango tiene su rival NPC y su tope de stats.
 - [ ] **Fase 5: PvP 1 contra 1.** Criterio: dos jugadores reales pueden retarse y pelear en el ring con las mismas reglas, y el ganador recibe puntos de rango si son de rangos parecidos.
 - [ ] **Fase 6: interfaz y arte (ForgeGUI).** Criterio: HUD, minijuegos, barras de pelea y pantallas de rango con el estilo final, funcionando en PC y celular.
-- [ ] **Fase 7: prepublicación.** Criterio: NPC quitados, solo PvP; validaciones anti-trampas en servidor; prueba con dos clientes reales y en celular; lista para publicar.
+- [ ] **Fase 7: prepublicación.** Criterio: los NPC ya no dan puntos de rango (solo el ring de práctica, sin puntos), el rango se sube solo con PvP; validaciones anti-trampas en servidor; prueba con dos clientes reales y en celular; lista para publicar.
 
 Después de publicar (fuera de la v1): torneos, más rangos, cosméticos, monedas y tienda.
 
@@ -27,6 +27,5 @@ Después de publicar (fuera de la v1): torneos, más rangos, cosméticos, moneda
 Fase 1: guardar datos del jugador (4 stats, rango y puntos de rango) con DataStore y mostrarlos en una interfaz simple. Valores iniciales y topes en `src/ReplicatedStorage/Config/`.
 
 ## Preguntas pendientes
-- Riesgo de quitar los NPC: con pocos jugadores conectados alguien puede no tener con quién pelear. ¿Modo de práctica sin puntos o solo PvP? (Hoy: solo PvP.)
 - Jugadores por servidor (provisional 12).
 - Nombre definitivo del juego.
