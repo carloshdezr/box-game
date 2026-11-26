@@ -1,5 +1,12 @@
 # Bitácora
 
+## 2026-11-26 16:53 · [codex] · Fase 1
+- Qué hice: corregí la carga con candado ajeno vigente: mantiene Cargando y reintenta cada 2 s hasta un plazo total de 30 s, configurables en Persistence. Si se libera, carga los datos originales; si agota el plazo, marca Error sin sobrescribir. Se cancelan reintentos al salir/cerrar. Anoté la decisión y actualicé la guía manual.
+- Archivos tocados: `src/ServerScriptService/Services/PlayerDataService.lua`, `src/ReplicatedStorage/Config/Persistence.lua`, `tools/check-data.lua`, `docs/DECISIONES.md`, `docs/ESTADO.md`, `docs/PRUEBA_FASE_1.md`, `docs/BITACORA.md`.
+- Cómo probarlo: el 2026-11-26 pasó `node tools/check-data.cjs` con Fengari temporal (menos de 2 minutos): intervalos de 2 s, liberación con progreso conservado, vencimiento del candado, Error a los 30 s sin escrituras ni reintentos posteriores, cancelación al salir/cerrar y regresiones anteriores. Se ajustó la prueba de carga/salida concurrente para aceptar adquisición cancelada sin registro. `git diff --check` pasó.
+- Qué quedó mal o pendiente: prueba manual en «box-game pruebas» pendiente; no se usó Studio ni se crearon copias. Fase 1 sigue abierta. Sin cambios de estructura; continúa pendiente la extracción automática de Graphify anotada anteriormente.
+- Siguiente paso recomendado: probar una reconexión rápida en el lugar autorizado y registrar el resultado manual en ESTADO.
+
 ## 2026-11-26 16:43 · [codex] · Fase 1
 - Qué hice: implementé persistencia versionada de los 4 stats, rango y puntos con UpdateAsync, bloqueo de sesión, autoguardado, salida y cierre. Añadí atributos replicados, HUD con tema único y aviso de carga/guardado fallido sin sobrescribir progreso. El dueño aprobó inicial 1 y topes 100/250/500. Fase 1 sigue abierta.
 - Archivos tocados: `src/ReplicatedStorage/Config/{Stats,Persistence,Theme}.lua`, `src/ServerScriptService/Services/{PlayerDataSchema,PlayerDataService}.lua`, `Main.server.lua`, `init.client.lua`, `tools/check-data.cjs`, `tools/check-data.lua`, `docs/{ESTADO,DECISIONES,BITACORA,PRUEBA_FASE_1}.md`, `graphify-out/GRAPH_REPORT.md`.

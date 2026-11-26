@@ -23,20 +23,25 @@ local function publish(player, data)
 	player:SetAttribute("PuntosRango", data.PuntosRango)
 end
 
-local function update(key, callback)
+local function update(key, callback, deadline)
 	for attempt = 1, Config.Attempts do
+		if deadline and os.clock() >= deadline then
+			return nil, false
+		end
 		local ok, result = pcall(function()
 			return store:UpdateAsync(key, callback)
 		end)
 		if ok then
-			return result
+			return result, true
 		end
 		warn("[PlayerData] DataStore falló (intento " .. attempt .. "): " .. tostring(result))
 		if attempt < Config.Attempts then
-			task.wait(Config.RetrySeconds)
+			local remaining = deadline and (deadline - os.clock()) or Config.RetrySeconds
+			if remaining <= 0 then break end
+			task.wait(math.min(Config.RetrySeconds, remaining))
 		end
 	end
-	return nil
+	return nil, false
 end
 
 local function validLock(lock)
@@ -97,7 +102,14 @@ local function load(player)
 		loading = true, loaded = false, data = Schema.New() }
 	sessions[player] = session
 	status(player, "Cargando")
-	local record = update(session.key, function(old)
+	local deadline = os.clock() + Config.LockWaitSeconds
+	local blockedBySession = false
+	local function acquire(old)
+		-- UpdateAsync may invoke the callback multiple times; only its last result counts.
+		blockedBySession = false
+		if closing or player.Parent ~= Players or os.clock() >= deadline then
+			return nil
+		end
 		if old == nil then
 			old = Schema.New()
 		elseif not Schema.Validate(old) then
@@ -108,13 +120,23 @@ local function load(player)
 				return nil
 			end
 			if old.Session.Id ~= session.id and old.Session.Expires > os.time() then
+				blockedBySession = true
 				return nil
 			end
 		end
 		local nextRecord = table.clone(old)
 		nextRecord.Session = { Id = session.id, Expires = os.time() + Config.SessionLeaseSeconds }
 		return nextRecord
-	end)
+	end
+	local record
+	while not closing and player.Parent == Players and os.clock() < deadline do
+		local requestOk
+		record, requestOk = update(session.key, acquire, deadline)
+		if record or not requestOk or not blockedBySession then break end
+		local remaining = deadline - os.clock()
+		if remaining <= 0 then break end
+		task.wait(math.min(Config.LockRetrySeconds, remaining))
+	end
 	if record then
 		session.data = table.clone(record)
 		session.data.Session = nil

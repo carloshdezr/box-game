@@ -16,7 +16,7 @@ Usar únicamente **box-game pruebas**, sincronizado con `rojo serve default.proj
 5. Con acceso a API Services deshabilitado por el dueño, entrar: aparece exactamente **Tu progreso no se está guardando**. No se permite modificar el progreso con `SetStat`; salir no guarda valores iniciales. Rehabilitar acceso y entrar: recuperar los datos anteriores.
 6. Revisar que el panel no tape los controles y se lea en PC y celular. Anotar fecha y resultado en `ESTADO.md`; solo entonces cerrar la fase.
 
-Si queda un bloqueo por un cierre abrupto, esperar hasta 180 segundos y reconectar. Un error de carga no se reintenta durante esa sesión después de los tres intentos iniciales. Los fallos de guardado posteriores sí se reintentan en el siguiente autoguardado; el aviso permanece hasta un guardado exitoso.
+Si otra sesión aún tiene el candado, la interfaz mantiene «Cargando progreso…» y la carga reintenta cada 2 segundos durante un máximo de 30 segundos. Si se libera o vence dentro del plazo, carga el progreso; si sigue ocupado al agotarlo, muestra el aviso de error sin sobrescribir nada. En una reconexión rápida, comprobar que no aparezca Error inmediatamente por ese candado. Si queda un bloqueo por un cierre abrupto, puede ser necesario esperar hasta su vencimiento (180 segundos) y reconectar. Los errores de API mantienen hasta tres intentos; los fallos de guardado posteriores se reintentan en el siguiente autoguardado y el aviso permanece hasta un guardado exitoso.
 
 ## Validación local rápida (sin Studio ni datos reales)
 

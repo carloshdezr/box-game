@@ -1,5 +1,10 @@
 # Decisiones
 
+## 2026-11-26 · [codex] · Espera por candado de otra sesión
+- **Qué:** la carga mantiene `EstadoDatos = "Cargando"` mientras encuentra un candado ajeno vigente. Reintenta cada `LockRetrySeconds = 2`, dentro de un plazo total `LockWaitSeconds = 30` desde el inicio de la carga; ambos valores están en `Config/Persistence.lua`. Si se libera o vence a tiempo, carga el progreso original. Si sigue ocupado al agotar el plazo, marca `Error` sin escribir datos.
+- **Por qué:** una reconexión rápida puede llegar antes de que el servidor anterior termine de guardar y libere el candado. No debe fallar inmediatamente ni robar la sesión anterior.
+- **Detalles:** los rechazos por datos inválidos y los errores de API conservan su tratamiento propio; solo el candado ajeno válido activa esta espera. Se cancelan reintentos al salir el jugador o cerrar el servidor. El plazo limita nuevas peticiones y esperas; una llamada UpdateAsync ya en curso depende del tiempo de respuesta de Roblox. Sustituye la necesidad inmediata de reconectar descrita en la entrada anterior.
+
 ## 2026-11-26 · [codex] · Datos y stats de Fase 1
 - **Qué:** los 4 stats empiezan en 1; topes Novato 100, Amateur 250 y Semi-pro 500. El dueño eligió estos números explícitamente en esta sesión. Rango inicial Novato y puntos iniciales 0, sin ascensos implementados hasta Fase 4.
 - **Por qué:** concretar el balance inicial solicitado, manteniendo valores en `Config/Stats.lua`.

@@ -12,8 +12,9 @@ local function signal()
 end
 local function setup()
     local now, queue, guid = 0, {}, 0
-    local storage = { records = {}, writes = 0, fail = false }
+    local storage = { records = {}, writes = 0, fail = false, calls = {} }
     function storage:UpdateAsync(key, callback)
+        table.insert(self.calls, now)
         if self.fail then error("simulated outage") end
         if self.delay then task.wait(self.delay) end
         callback(copy(self.records[key])) -- callbacks can run repeatedly
@@ -120,9 +121,62 @@ local record = modules.Schema.New()
 record.Session = {Id = "other", Expires = 9999}
 db.records.Player_4 = record
 p = join(4)
+assert(p:GetAttribute("EstadoDatos") == "Cargando" and db.writes == 0)
+advance(29)
+assert(p:GetAttribute("EstadoDatos") == "Cargando" and db.writes == 0)
+advance(1)
 assert(p:GetAttribute("EstadoDatos") == "Error" and db.writes == 0)
 leave(p)
 print("PASS: failed load, invalid schema, foreign lock never overwritten")
+
+db, service, join, leave, advance, modules = setup()
+local locked = modules.Schema.New()
+locked.Fuerza = 37
+locked.Session = {Id = "previous", Expires = 9999}
+db.records.Player_7 = locked
+p = join(7)
+advance(5)
+assert(p:GetAttribute("EstadoDatos") == "Cargando" and #db.calls == 3)
+assert(db.calls[1] == 0 and db.calls[2] == 2 and db.calls[3] == 4)
+db.records.Player_7.Session = nil
+advance(1)
+assert(p:GetAttribute("EstadoDatos") == "Listo" and p:GetAttribute("Fuerza") == 37)
+assert(#db.calls == 4 and db.calls[4] == 6)
+leave(p)
+print("PASS: lock release loads original data on the next 2-second retry")
+
+db, service, join, leave, advance, modules = setup()
+locked = modules.Schema.New()
+locked.Session = {Id = "previous", Expires = 9999}
+db.records.Player_8 = locked
+p = join(8)
+advance(29)
+assert(p:GetAttribute("EstadoDatos") == "Cargando" and #db.calls == 15)
+advance(1)
+assert(p:GetAttribute("EstadoDatos") == "Error" and #db.calls == 15 and db.writes == 0)
+advance(60)
+assert(#db.calls == 15 and db.records.Player_8.Session.Id == "previous")
+print("PASS: lock timeout at 30 seconds without extra requests or writes")
+
+db, service, join, leave, advance, modules = setup()
+locked = modules.Schema.New()
+locked.Session = {Id = "previous", Expires = 5}
+db.records.Player_9 = locked
+p = join(9)
+advance(6)
+assert(p:GetAttribute("EstadoDatos") == "Listo" and db.writes == 1)
+print("PASS: lock expiring during wait is acquired")
+
+db, service, join, leave, advance, modules = setup()
+locked = modules.Schema.New()
+locked.Session = {Id = "previous", Expires = 9999}
+db.records.Player_10 = locked
+p = join(10)
+leave(p)
+task.spawn(game.close)
+advance(3)
+assert(#db.calls == 1 and db.writes == 0)
+print("PASS: departure/shutdown cancels lock retries")
 
 db, service, join, leave, advance, modules = setup()
 local record2 = modules.Schema.New()
@@ -145,5 +199,6 @@ p = join(6)
 leave(p)
 task.spawn(game.close)
 advance(4)
-assert(db.records.Player_6.Session == nil, "load/leave/close overlap must release")
+assert(db.records.Player_6 == nil or db.records.Player_6.Session == nil,
+    "load/leave/close overlap must cancel acquisition or release")
 print("PASS: load/leave/shutdown overlap; all game scripts parse")

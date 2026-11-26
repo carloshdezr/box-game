@@ -18,11 +18,12 @@ Cada fase tiene su criterio de "terminado". No se pasa a la siguiente sin prueba
 Después de publicar (fuera de la v1): torneos, más rangos, cosméticos, monedas y tienda.
 
 ## Último en trabajar
-[codex] · 2026-11-26. Implementación de Fase 1; fase abierta hasta prueba manual.
+[codex] · 2026-11-26. Corregida la carga ante candado ocupado: espera configurable de 30 s con reintentos cada 2 s. Fase abierta hasta prueba manual.
 
 ## Avance de Fase 1
 - [x] DataStore con UpdateAsync, autoguardado cada 60 segundos, salida y cierre del servidor.
 - [x] Bloqueo por sesión y rechazo de registros inválidos; carga fallida nunca guarda valores iniciales sobre datos existentes.
+- [x] Candado ajeno vigente: conserva Cargando, reintenta cada 2 s hasta 30 s; pruebas locales de liberación, vencimiento, timeout sin escrituras y cancelación al salir/cerrar.
 - [x] Fuerza, Velocidad, Stamina y Defensa iniciales en 1; topes Novato 100, Amateur 250, Semi-pro 500 (aprobados por el dueño el 2026-11-26).
 - [x] Rango y puntos persistidos; atributos del jugador publicados por el servidor.
 - [x] HUD simple con tema central y aviso «Tu progreso no se está guardando».
