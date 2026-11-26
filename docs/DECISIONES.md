@@ -10,6 +10,20 @@
 - **Qué:** no se guardan archivos `.rbxl`/`.rbxlx` en el repo (ver `.gitignore`).
 - **Por qué:** cada copia de lugar aparece en la lista de experiencias y confunde.
 
+## 2026-11-26 · [claude] · Diseño del juego
+- **Qué:** juego de boxeo que mezcla simulador de gym y juego de pelea. Los stats pesan mucho, pero entre niveles parecidos gana el mejor timing (esquivar justo da contraataque).
+- **Por qué:** si solo cuentan los stats las peleas aburren; si solo cuenta la habilidad, entrenar no sirve.
+- **Qué:** cada estación del gym es un minijuego; el resultado lo valida el servidor.
+- **Por qué:** evita el autoclicker y hace que entrenar sea divertido.
+- **Qué:** tope de stats por rango.
+- **Por qué:** obliga a pelear para avanzar y conecta las dos mitades del juego.
+- **Qué:** NPC solo durante el desarrollo; antes de publicar se quitan y queda solo PvP (decisión de la persona dueña). El NPC usa el mismo código de pelea que un jugador.
+- **Por qué:** permite practicar solo mientras se construye, y quitar los NPC no obliga a rehacer el combate.
+- **Qué:** estilo caricatura, gráficos e interfaz con ForgeGUI; la interfaz bonita va en la Fase 6.
+- **Por qué:** primero que funcione. Si ForgeGUI no da modelos 3D, se usan bloques o Creator Store gratis.
+- **Qué:** v1 con 3 rangos y 5 movimientos; torneos, cosméticos y monedas después de publicar.
+- **Por qué:** alcance chico para terminarlo.
+
 ## 2026-11-26 · [claude] · Commits directos a main
 - **Qué:** se trabaja directo en `main`, sin ramas por fase ni Pull Requests. Cada commit debe dejar el juego sin romper.
 - **Por qué:** la persona dueña del proyecto lo trabaja sola y prefiere avanzar sin pasos de Git extra. El control de calidad sigue en las validaciones rápidas y en la prueba manual anotada en `ESTADO.md`.
