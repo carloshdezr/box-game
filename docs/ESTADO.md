@@ -18,7 +18,7 @@ Cada fase tiene su criterio de "terminado". No se pasa a la siguiente sin prueba
 Después de publicar (fuera de la v1): torneos, más rangos, cosméticos, monedas y tienda.
 
 ## Último en trabajar
-[codex] · 2026-11-26 17:12. Lugar identificado por ID y revisión MCP ejecutada; carga inicial correcta, SetStat desde MCP rechazado y HUD ausente. Fase 1 sigue abierta.
+[codex] · 2026-11-26 17:22. Sincronización reparada y pruebas MCP de persistencia, tope, cierre y HUD correctas. Fase 1 sigue abierta hasta prueba manual del dueño.
 
 ## Avance de Fase 1
 - [x] DataStore con UpdateAsync, autoguardado cada 60 segundos, salida y cierre del servidor.
@@ -29,19 +29,22 @@ Después de publicar (fuera de la v1): torneos, más rangos, cosméticos, moneda
 - [x] HUD simple con tema central y aviso «Tu progreso no se está guardando».
 - [x] Validación rápida local con DataStore simulado y mapeo Rojo, sin crear archivos de lugar.
 - [x] 2026-11-26 17:12: Play mediante MCP en placeId `111090309292395`; atributos servidor y cliente: cuatro stats en 1, Novato, PuntosRango 0, EstadoDatos Listo.
-- [ ] Revisión MCP de persistencia/tope: bloqueada por SetStat devolviendo false; ver resultado abajo.
+- [x] 2026-11-26 17:22: MCP confirmó los nueve scripts idénticos al repo, StatsHUD LocalScript y Services.StudioDebug ModuleScript. En Play, StudioDebug BindableFunction funcionó.
+- [x] Revisión MCP (104 s): stats iniciales 1/Novato/Listo; Fuerza 37 reflejada en HUD; espera de más de 60 s, Stop/Play y Fuerza 37 conservada; 999 limitado a 100; Fuerza restaurada a 1.
+- [x] Revisión MCP de cierre (6 s): Defensa 12 conservada tras Stop inmediato antes de autoguardado; restaurada a 1 y Stop. Todos los stats terminaron en 1.
+- [x] HUD inspeccionado visualmente en PC e iPhone 17 Pro emulado, horizontal y vertical: texto legible y sin superposición con los controles táctiles. Simulador devuelto al viewport normal.
+- [ ] Fallo de carga con API Services deshabilitado: el dueño eligió expresamente dejar esta prueba pendiente el 2026-11-26. No se cambió la configuración de API Services.
 - [ ] Prueba manual del dueño: persistencia real, salida/cierre, fallo de carga y HUD en PC/celular. Guía: `docs/PRUEBA_FASE_1.md`.
 
 ## Problemas conocidos
-- Revisión MCP 2026-11-26 17:12 (40 s): `SetStat(p, "Fuerza", 37)` devolvió false y Fuerza quedó en 1. `GetSnapshot(p)` desde ese contexto devolvió nil pese a EstadoDatos Listo. Causa pendiente de diagnóstico; no se da por demostrado un fallo de persistencia ni un aislamiento del contexto MCP.
-- En el cliente, `PlayerGui` no contenía StatsHUD; solo se observó Freecam. No se confirmó el HUD visual.
+- Resueltos los bloqueos de las 17:12: se usa StudioDebug para acceder a la sesión activa. Studio tenía DOS objetos llamados StarterPlayerScripts (un LocalScript antiguo vacío y el contenedor correcto); se retiró por MCP el duplicado antiguo y se sincronizaron las fuentes exactas del repo. StatsHUD ahora existe y funciona.
 - Output reportó tres veces `rbxassetid://203785492: Asset type does not match requested type`; no pasó el requisito de Output sin errores. Origen pendiente.
 - Identidad resuelta: el dueño confirmó el único lugar autorizado, placeId `111090309292395`, universeId `10779249165`. El nombre visible es irrelevante; seleccionar el studio_id cuya entrada MCP tenga ese placeId. No usar otro ID ni un Place1 sin guardar.
 - Graphify no disponible; instalación temporal interrumpida al atascarse la resolución de dependencias. `graphify-out/GRAPH_REPORT.md` contiene un mapa manual actualizado, no una extracción automática. Pendiente regenerarlo con Graphify.
 - El ejecutable `rojo` en PATH es un shim de Rokit sin manifiesto; el sourcemap pasó usando el binario instalado de Rojo 7.7.1 directamente.
 
 ## Siguiente paso
-Diagnosticar por qué SetStat/GetSnapshot desde MCP no acceden a la sesión cargada y por qué falta StatsHUD, sin editar scripts en Studio. Después repetir en placeId `111090309292395` la parte pendiente: Fuerza 37, autoguardado, Stop/Play y persistencia en 37, tope 999→100 y restauración a 1. Esta revisión se detuvo a los 40 s, con Fuerza todavía en 1 y Studio en Edit; no se esperó autoguardado ni se probó reconexión/tope. Fallo de carga con API deshabilitada y HUD PC/celular también pendientes. Mantener la prueba manual del dueño y Graphify pendientes. No iniciar Fase 2.
+El dueño debe confirmar su recorrido manual; la prueba de fallo de carga con API Services deshabilitado queda pendiente por decisión expresa suya. No cerrar Fase 1 todavía. Studio está en Edit, viewport normal y todos los stats restaurados a 1. Rojo 7.7.1 quedó corriendo en localhost:34872. Mantener Graphify pendiente; no iniciar Fase 2.
 
 ## Preguntas pendientes
 - Jugadores por servidor (provisional 12).

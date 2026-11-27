@@ -5,6 +5,9 @@ Actualizado el 2026-11-26 por [codex]. **Mapa manual, no generado por Graphify.*
 ```mermaid
 flowchart TD
   Main[Main.server.lua] --> Service[Services/PlayerDataService.lua]
+  Main --> Debug[Services/StudioDebug.lua]
+  Debug --> Bridge[BindableFunction StudioDebug solo en Studio]
+  Bridge --> Service
   Service --> Schema[Services/PlayerDataSchema.lua]
   Service --> Stats[Config/Stats.lua]
   Service --> Persistence[Config/Persistence.lua]
@@ -12,7 +15,7 @@ flowchart TD
   Schema --> Persistence
   Service --> Store[DataStore: BoxPlayerData_v1]
   Service --> Attributes[Atributos de Player]
-  Client[init.client.lua] --> Attributes
+  Client[StatsHUD.client.lua] --> Attributes
   Client --> Stats
   Client --> Theme[Config/Theme.lua]
 ```
@@ -22,7 +25,8 @@ flowchart TD
 - `Stats`: nombres, valores iniciales y topes aprobados de los tres rangos.
 - `Persistence`: nombre del almacén, versión, tiempos y reintentos.
 - `Theme`: fuente, colores, tamaños y espaciado del HUD.
-- `init.client.lua`: crea el HUD y escucha atributos; no escribe datos ni llama remotos.
+- `StatsHUD.client.lua`: LocalScript dentro del contenedor StarterPlayerScripts; crea el HUD y escucha atributos; no escribe datos ni llama remotos.
+- `StudioDebug.lua`: puente de pruebas solo en Studio; Main le pasa la instancia activa de PlayerDataService para Snapshot/SetStat desde MCP sin requerir otra copia del módulo.
 - `tools/check-data.cjs` + `tools/check-data.lua`: validación sintáctica y escenarios aislados con DataStore simulado. No sincronizados a Studio.
 - `Config/Game.lua`: configuración general preexistente, todavía sin consumidor.
 

@@ -14,7 +14,7 @@ Usar únicamente **placeId `111090309292395`** (universeId `10779249165`), sin d
 
 3. Ver Fuerza 37 en la interfaz. Esperar más de 60 segundos para el autoguardado, salir y volver: debe seguir en 37. Cambiar otro stat, detener Play antes del siguiente autoguardado y volver para comprobar el guardado al cerrar.
 4. En el servidor, `debug:Invoke("SetStat", nil, "Fuerza", 999)` debe mostrar 100 (tope Novato). Cambiar un atributo directamente no modifica los datos guardados. Al terminar la revisión solicitada por el dueño, restaurar Fuerza a 1 con el mismo comando y salir para guardar.
-5. Con acceso a API Services deshabilitado por el dueño, entrar: aparece exactamente **Tu progreso no se está guardando**. No se permite modificar el progreso con `SetStat`; salir no guarda valores iniciales. Rehabilitar acceso y entrar: recuperar los datos anteriores.
+5. Con acceso a API Services deshabilitado por el dueño, entrar: aparece exactamente **Tu progreso no se está guardando**. No se permite modificar el progreso con `SetStat`; salir no guarda valores iniciales. Rehabilitar acceso y entrar: recuperar los datos anteriores. **Pendiente por decisión expresa del dueño el 2026-11-26; no se desactivó API Services en la revisión MCP.**
 6. Revisar que el panel no tape los controles y se lea en PC y celular. Anotar fecha y resultado en `ESTADO.md`; solo entonces cerrar la fase.
 
 Si otra sesión aún tiene el candado, la interfaz mantiene «Cargando progreso…» y la carga reintenta cada 2 segundos durante un máximo de 30 segundos. Si se libera o vence dentro del plazo, carga el progreso; si sigue ocupado al agotarlo, muestra el aviso de error sin sobrescribir nada. En una reconexión rápida, comprobar que no aparezca Error inmediatamente por ese candado. Si queda un bloqueo por un cierre abrupto, puede ser necesario esperar hasta su vencimiento (180 segundos) y reconectar. Los errores de API mantienen hasta tres intentos; los fallos de guardado posteriores se reintentan en el siguiente autoguardado y el aviso permanece hasta un guardado exitoso.
@@ -22,6 +22,8 @@ Si otra sesión aún tiene el candado, la interfaz mantiene «Cargando progreso�
 ## Validación local rápida (sin Studio ni datos reales)
 
 Resultado MCP del 2026-11-26 17:12: carga inicial correcta por atributos, pero SetStat(37) devolvió false, GetSnapshot devolvió nil y no apareció StatsHUD. Output con error de tipo del asset 203785492. Se detuvo Play a los 40 s; Fuerza permaneció en 1. Autoguardado/reconexión y tope aún no comprobados. No sustituye la prueba manual del dueño.
+
+Actualización MCP del 2026-11-26 17:22: esos bloqueos quedaron resueltos tras sincronizar los nueve scripts y retirar el LocalScript duplicado llamado StarterPlayerScripts. Pasaron carga inicial, StudioDebug, Fuerza 37 y HUD, espera >60 s seguida de Stop/Play con Fuerza 37, tope 999→100, guardado de Defensa 12 al cerrar antes del autoguardado y restauración de los cuatro stats a 1. HUD revisado en PC y celular emulado horizontal/vertical. Revisiones de 104 s y 6 s. El error del asset externo 203785492 continúa; prueba con API deshabilitada pendiente. Ver ESTADO para situación vigente; no sustituye la prueba manual del dueño.
 
 Instalar `fengari` en una carpeta temporal y ejecutar:
 

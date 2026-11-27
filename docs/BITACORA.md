@@ -1,5 +1,12 @@
 # Bitácora
 
+## 2026-11-26 17:22 · [codex] · Fase 1
+- Qué hice: traje los cambios f098766 y leí la regla nueva. Arranqué Rojo 7.7.1 en segundo plano, localhost:34872; el dueño conectó el plugin. Studio tenía dos objetos llamados StarterPlayerScripts: un LocalScript antiguo vacío y el contenedor correcto. Retiré el duplicado antiguo por MCP y apliqué/verifiqué los nueve scripts exactos del repo en placeId 111090309292395. Confirmé StatsHUD LocalScript y Services.StudioDebug ModuleScript, y el puente BindableFunction durante Play. Actualicé el mapa manual para los scripts nuevos de la sesión anterior; no es extracción Graphify.
+- Archivos tocados: `docs/ESTADO.md`, `docs/PRUEBA_FASE_1.md`, `docs/BITACORA.md`, `graphify-out/GRAPH_REPORT.md`. Código del juego sin cambios en el repo; fuentes de Studio sincronizadas desde src según autorización.
+- Cómo probarlo: el 2026-11-26, revisión MCP de 104 s: cuatro stats 1, Novato, PuntosRango 0 y Listo; StudioDebug SetStat Fuerza 37 devolvió true, atributo/HUD 37; espera >60 s, Stop/Play y Fuerza 37 conservada; 999 limitado a 100; Fuerza restaurada a 1. Se cambió Defensa a 12 y se cerró antes del autoguardado. Segunda revisión de 6 s: Defensa 12 persistida y Fuerza 1; Defensa restaurada a 1 y Stop. HUD legible en PC y iPhone 17 Pro emulado horizontal/vertical, sin tapar joystick/salto. Simulador restablecido. También pasaron simulación local y sourcemap Rojo.
+- Qué quedó mal o pendiente: Output sigue con tres mensajes del asset 203785492 (tipo incorrecto); no se observaron errores de PlayerData. El dueño eligió dejar pendiente el paso de API Services deshabilitado; configuración intacta. Falta recorrido manual del dueño para cerrar fase. Graphify automático sigue pendiente. No se publicaron/guardaron lugares ni se crearon copias. Studio quedó en Edit, viewport normal, todos los stats en 1 y Rojo corriendo.
+- Siguiente paso recomendado: recorrido manual del dueño y, cuando decida retomarlo, paso 5 de fallo de carga. No avanzar a Fase 2 hasta registrar cierre de Fase 1.
+
 ## 2026-11-26 17:25 · [claude] · Reglas
 - Qué hice: agregué a AGENTS.md que sincronizar con Studio (Rojo o MCP) lo hace la IA; la persona dueña no corre comandos en la terminal, como en oaxacos.
 - Archivos tocados: `AGENTS.md`, `docs/BITACORA.md`.
