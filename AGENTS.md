@@ -27,6 +27,14 @@ Este es un juego de Roblox que se construye en equipo de una sola persona, con u
 - No publiques ni guardes el lugar en Roblox: eso lo hace la persona dueña del proyecto.
 - Si el lugar no está abierto, no crees otro. Anota en la bitácora que la prueba en Studio quedó pendiente.
 
+## Sincronizar con Studio (lo hace la IA, nunca la persona dueña)
+
+- La persona dueña **no corre comandos en la terminal**. La IA se encarga de que el código del repo llegue a Studio.
+- Opción 1: la IA arranca `rojo serve default.project.json` en segundo plano y lo reinicia si cambió `default.project.json`. Si el plugin de Rojo en Studio no está conectado, se lo pide a la persona dueña en una sola línea ("dale Connect en el plugin de Rojo").
+- Opción 2: si Rojo no está disponible, la IA instala los scripts cambiados en Studio por MCP (crear o actualizar el script con el mismo nombre y ruta que en `src/`).
+- Si el comando `rojo` no funciona en esta carpeta, usar `C:/Users/Carlos/.rokit/tool-storage/rojo-rbx/rojo/7.7.1/rojo.exe`.
+- Antes de probar, comprobar en Studio por MCP que los scripts del repo están ahí (por ejemplo `ServerScriptService.Main` y `StarterPlayerScripts.StatsHUD`).
+
 ## Regla de pruebas
 
 - La persona dueña del proyecto hace los recorridos completos a mano. Es la prueba que cuenta.

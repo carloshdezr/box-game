@@ -1,5 +1,12 @@
 # Bitácora
 
+## 2026-11-26 17:25 · [claude] · Reglas
+- Qué hice: agregué a AGENTS.md que sincronizar con Studio (Rojo o MCP) lo hace la IA; la persona dueña no corre comandos en la terminal, como en oaxacos.
+- Archivos tocados: `AGENTS.md`, `docs/BITACORA.md`.
+- Cómo probarlo: la siguiente IA arranca Rojo sola antes de la prueba de Fase 1.
+- Qué quedó mal o pendiente: la prueba de Fase 1 (ver entrada de las 17:20).
+- Siguiente paso recomendado: arrancar o reiniciar Rojo, comprobar que StatsHUD está en Studio y repetir `docs/PRUEBA_FASE_1.md`.
+
 ## 2026-11-26 17:20 · [claude] · Fase 1
 - Qué hice: corregí las dos fallas de la revisión de las 17:12. El HUD no aparecía porque `init.client.lua` hacía que Rojo convirtiera `StarterPlayerScripts` en un LocalScript; ahora es `StatsHUD.client.lua` y el proyecto declara la clase. `SetStat` devolvía `false` porque el `require` desde el MCP carga otra copia del módulo; agregué `Services/StudioDebug` (BindableFunction solo en Studio) y actualicé la guía.
 - Archivos tocados: `default.project.json`, `src/StarterPlayer/StarterPlayerScripts/StatsHUD.client.lua` (renombrado), `src/ServerScriptService/Main.server.lua`, `src/ServerScriptService/Services/StudioDebug.lua`, `docs/PRUEBA_FASE_1.md`, `docs/DECISIONES.md`, `docs/BITACORA.md`.
