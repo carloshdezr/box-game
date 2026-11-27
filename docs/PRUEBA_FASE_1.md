@@ -1,6 +1,6 @@
 # Prueba manual pendiente: Fase 1
 
-Usar únicamente **box-game pruebas**, sincronizado con `rojo serve default.project.json`. No crear copias ni guardar/publicar desde una IA. Para persistencia real, el lugar debe pertenecer a una experiencia y tener habilitado el acceso a API Services en Studio por su dueño.
+Usar únicamente **box V1**, nunca **Place1**, sincronizado con `rojo serve default.project.json`. El dueño confirma que está guardado en Roblox, con API Services activado y Rojo conectado. No crear copias ni guardar/publicar desde una IA.
 
 1. Entrar: ver Fuerza, Velocidad, Stamina y Defensa en 1, y rango Novato. En el jugador del servidor revisar también `PuntosRango = 0` y `EstadoDatos = "Listo"`.
 2. Para probar un cambio real antes de que exista el gym, ejecutar en la barra de comandos **del servidor durante Play**, sin editar scripts:

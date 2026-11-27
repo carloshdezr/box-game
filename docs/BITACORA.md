@@ -1,5 +1,12 @@
 # Bitácora
 
+## 2026-11-26 17:00 · [codex] · Fase 1
+- Qué hice: corregí el nombre del único lugar autorizado a «box V1» en AGENTS, ESTADO y guía de prueba, prohibiendo explícitamente Place1. Intenté seleccionar el lugar mediante MCP; list_roblox_studios devolvió una instancia sin nombre en modo Unavailable y «Place is not open». get_studio_state confirmó el bloqueo; corté la revisión en menos de 2 minutos.
+- Archivos tocados: `AGENTS.md`, `docs/ESTADO.md`, `docs/PRUEBA_FASE_1.md`, `docs/BITACORA.md`.
+- Cómo probarlo: el 2026-11-26 a las 17:00 se comprobó disponibilidad del MCP; no fue posible iniciar Play. `git diff --check` sin errores. Revisar el nombre corregido en los tres documentos.
+- Qué quedó mal o pendiente: no ejecutados los cinco pasos solicitados (stats iniciales/Listo/Output, cambio a 37, autoguardado y reconexión, tope 100, restauración a 1). No se cambiaron stats, no se tocó Place1, no se crearon copias ni se guardó/publicó ningún lugar. La confirmación del dueño sobre API Services/Rojo queda registrada, pero el MCP no expuso el lugar. Sin cambios de estructura; Graphify continúa pendiente como antes.
+- Siguiente paso recomendado: restablecer la conexión MCP para que liste «box V1» y repetir la revisión de persistencia solicitada, con máximo 2 minutos por revisión. Fase 1 abierta.
+
 ## 2026-11-26 16:53 · [codex] · Fase 1
 - Qué hice: corregí la carga con candado ajeno vigente: mantiene Cargando y reintenta cada 2 s hasta un plazo total de 30 s, configurables en Persistence. Si se libera, carga los datos originales; si agota el plazo, marca Error sin sobrescribir. Se cancelan reintentos al salir/cerrar. Anoté la decisión y actualicé la guía manual.
 - Archivos tocados: `src/ServerScriptService/Services/PlayerDataService.lua`, `src/ReplicatedStorage/Config/Persistence.lua`, `tools/check-data.lua`, `docs/DECISIONES.md`, `docs/ESTADO.md`, `docs/PRUEBA_FASE_1.md`, `docs/BITACORA.md`.
