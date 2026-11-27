@@ -18,7 +18,7 @@ Cada fase tiene su criterio de "terminado". No se pasa a la siguiente sin prueba
 Después de publicar (fuera de la v1): torneos, más rangos, cosméticos, monedas y tienda.
 
 ## Último en trabajar
-[codex] · 2026-11-26 17:05. MCP conectado, pero el lugar listado tiene otro nombre; pendiente confirmar identidad antes de Play. Fase 1 sigue abierta.
+[codex] · 2026-11-26 17:12. Lugar identificado por ID y revisión MCP ejecutada; carga inicial correcta, SetStat desde MCP rechazado y HUD ausente. Fase 1 sigue abierta.
 
 ## Avance de Fase 1
 - [x] DataStore con UpdateAsync, autoguardado cada 60 segundos, salida y cierre del servidor.
@@ -28,15 +28,20 @@ Después de publicar (fuera de la v1): torneos, más rangos, cosméticos, moneda
 - [x] Rango y puntos persistidos; atributos del jugador publicados por el servidor.
 - [x] HUD simple con tema central y aviso «Tu progreso no se está guardando».
 - [x] Validación rápida local con DataStore simulado y mapeo Rojo, sin crear archivos de lugar.
+- [x] 2026-11-26 17:12: Play mediante MCP en placeId `111090309292395`; atributos servidor y cliente: cuatro stats en 1, Novato, PuntosRango 0, EstadoDatos Listo.
+- [ ] Revisión MCP de persistencia/tope: bloqueada por SetStat devolviendo false; ver resultado abajo.
 - [ ] Prueba manual del dueño: persistencia real, salida/cierre, fallo de carga y HUD en PC/celular. Guía: `docs/PRUEBA_FASE_1.md`.
 
 ## Problemas conocidos
-- El lugar autorizado es «box V1». El 2026-11-26 a las 17:05, el MCP ya lista un lugar en Edit guardado en Roblox: «Lugar de zToT1x: 11262026_1», placeId `111090309292395`, universeId `10779249165`. No hay entrada llamada «box V1»; la API pública oculta el título de la experiencia. Pendiente confirmar con el dueño que ese ID es el lugar autorizado. No se inició Play ni se modificaron stats. Esta versión del MCP selecciona por `studio_id`; no expone `set_active_studio`. Nunca usar «Place1».
+- Revisión MCP 2026-11-26 17:12 (40 s): `SetStat(p, "Fuerza", 37)` devolvió false y Fuerza quedó en 1. `GetSnapshot(p)` desde ese contexto devolvió nil pese a EstadoDatos Listo. Causa pendiente de diagnóstico; no se da por demostrado un fallo de persistencia ni un aislamiento del contexto MCP.
+- En el cliente, `PlayerGui` no contenía StatsHUD; solo se observó Freecam. No se confirmó el HUD visual.
+- Output reportó tres veces `rbxassetid://203785492: Asset type does not match requested type`; no pasó el requisito de Output sin errores. Origen pendiente.
+- Identidad resuelta: el dueño confirmó el único lugar autorizado, placeId `111090309292395`, universeId `10779249165`. El nombre visible es irrelevante; seleccionar el studio_id cuya entrada MCP tenga ese placeId. No usar otro ID ni un Place1 sin guardar.
 - Graphify no disponible; instalación temporal interrumpida al atascarse la resolución de dependencias. `graphify-out/GRAPH_REPORT.md` contiene un mapa manual actualizado, no una extracción automática. Pendiente regenerarlo con Graphify.
 - El ejecutable `rojo` en PATH es un shim de Rokit sin manifiesto; el sourcemap pasó usando el binario instalado de Rojo 7.7.1 directamente.
 
 ## Siguiente paso
-Confirmar que placeId `111090309292395` corresponde a «box V1», o abrir el lugar correcto. Luego realizar la revisión solicitada: stats iniciales/Listo/Output, Fuerza 37, esperar autoguardado, Stop/Play y persistencia en 37, tope 999→100 y restaurar Fuerza a 1. Todos esos pasos siguen sin ejecutar. Anotar resultados antes de cerrar Fase 1; mantener la prueba manual del dueño pendiente. Regenerar el grafo con Graphify cuando esté disponible. No iniciar Fase 2 todavía.
+Diagnosticar por qué SetStat/GetSnapshot desde MCP no acceden a la sesión cargada y por qué falta StatsHUD, sin editar scripts en Studio. Después repetir en placeId `111090309292395` la parte pendiente: Fuerza 37, autoguardado, Stop/Play y persistencia en 37, tope 999→100 y restauración a 1. Esta revisión se detuvo a los 40 s, con Fuerza todavía en 1 y Studio en Edit; no se esperó autoguardado ni se probó reconexión/tope. Fallo de carga con API deshabilitada y HUD PC/celular también pendientes. Mantener la prueba manual del dueño y Graphify pendientes. No iniciar Fase 2.
 
 ## Preguntas pendientes
 - Jugadores por servidor (provisional 12).

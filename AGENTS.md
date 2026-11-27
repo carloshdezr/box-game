@@ -22,7 +22,7 @@ Este es un juego de Roblox que se construye en equipo de una sola persona, con u
 
 ## Lugar de pruebas en Studio (regla obligatoria)
 
-- Existe **un solo lugar de pruebas** en Studio: **box V1**. Se trabaja y se prueba solo ahí. Nunca usar un lugar llamado **Place1**.
+- Existe **un solo lugar de pruebas** en Studio: **placeId `111090309292395`** (universeId `10779249165`). Seleccionarlo por ese ID, no por su nombre visible, que puede variar. El dueño confirmó que es su lugar de pruebas el 2026-11-26. No usar ningún lugar con otro ID ni un Place1 sin guardar.
 - **Prohibido crear copias**: nada de archivos `.rbxl`/`.rbxlx` en el repo ni lugares temporales.
 - No publiques ni guardes el lugar en Roblox: eso lo hace la persona dueña del proyecto.
 - Si el lugar no está abierto, no crees otro. Anota en la bitácora que la prueba en Studio quedó pendiente.

@@ -1,5 +1,12 @@
 # Bitácora
 
+## 2026-11-26 17:12 · [codex] · Fase 1
+- Qué hice: el dueño confirmó placeId `111090309292395` (universeId `10779249165`) como único lugar de pruebas. Actualicé AGENTS y documentos vigentes para seleccionar por ID, no por nombre. Los nombres en entradas anteriores se conservan como historia. Ejecuté Play en ese ID y detuve la revisión al trabarse, en 40 segundos.
+- Archivos tocados: `AGENTS.md`, `docs/ESTADO.md`, `docs/PRUEBA_FASE_1.md`, `docs/BITACORA.md`.
+- Cómo probarlo: el 2026-11-26 a las 17:12, servidor y cliente mostraron Fuerza/Velocidad/Stamina/Defensa=1, Rango=Novato, PuntosRango=0 y EstadoDatos=Listo para el jugador 5033842342. SetStat(Fuerza,37) desde execute_luau Server devolvió false y el atributo permaneció en 1; GetSnapshot devolvió nil. Se verificó RunService:IsServer()=true y el Main sincronizado arranca PlayerDataService. No se alteraron scripts.
+- Qué quedó mal o pendiente: no apareció StatsHUD en PlayerGui (solo Freecam); Output tuvo tres errores del asset 203785492 por tipo incorrecto. Pendiente diagnosticar el rechazo de SetStat desde MCP, sin atribuir causa aún. No se esperó autoguardado ni se probó Stop/Play con 37, tope 999→100, fallo con API deshabilitada ni HUD PC/celular. Fuerza siguió en 1; no hizo falta restaurarla. Se dejó Studio en Edit; sin copias ni publicación. Fase abierta, estructura sin cambios y Graphify pendiente anterior.
+- Siguiente paso recomendado: diagnosticar contexto de la sesión y sincronización/ejecución del cliente en el repo; luego repetir los pasos pendientes en el mismo placeId, con máximo 2 minutos por revisión.
+
 ## 2026-11-26 17:05 · [codex] · Fase 1
 - Qué hice: listé Studios con MCP. Ahora aparece un lugar guardado en modo Edit, «Lugar de zToT1x: 11262026_1», placeId 111090309292395, universeId 10779249165. Busqué set_active_studio: no está disponible; las herramientas seleccionan con studio_id. Intenté verificar el nombre de la experiencia mediante consulta pública, pero Roblox devuelve título oculto.
 - Archivos tocados: `docs/ESTADO.md`, `docs/BITACORA.md`.
