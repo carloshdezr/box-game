@@ -7,7 +7,7 @@ local Players = game:GetService("Players")
 
 local StudioDebug = {}
 
-function StudioDebug.Start(playerData)
+function StudioDebug.Start(playerData, training)
 	if not RunService:IsStudio() then
 		return
 	end
@@ -22,6 +22,13 @@ function StudioDebug.Start(playerData)
 			return playerData.SetStat(player, name, value)
 		elseif action == "Snapshot" then
 			return playerData.GetSnapshot(player)
+		elseif action == "TrainingStart" and training then
+			return training.Begin(player, name)
+		elseif action == "TrainingFinish" and training then
+			return training.Complete(player, value)
+		elseif action == "TrainingCancel" and training then
+			training.Cancel(player)
+			return true
 		end
 		return false, "AccionDesconocida"
 	end

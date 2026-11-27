@@ -11,3 +11,8 @@ node_modules/
 .env
 *.log
 .venv*/
+
+# Cachés locales de Graphify; se versionan reporte, JSON y HTML del grafo.
+graphify-out/cache/
+graphify-out/.graphify*
+graphify-out/manifest.json

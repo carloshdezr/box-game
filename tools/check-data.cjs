@@ -25,8 +25,10 @@ const files = {
   configSource: 'src/ReplicatedStorage/Config/Persistence.lua',
   schemaSource: 'src/ServerScriptService/Services/PlayerDataSchema.lua',
   serviceSource: 'src/ServerScriptService/Services/PlayerDataService.lua',
+  trainingSource: 'src/ServerScriptService/Services/TrainingService.lua',
+  trainingConfigSource: 'src/ReplicatedStorage/Config/Training.lua',
 };
 const program = Object.entries(files).map(([key, file]) => `${key} = [====[${source(file)}]====]`).join('\n')
-  + '\n' + source('tools/check-data.lua');
+  + '\n' + source('tools/check-data.lua') + '\n' + source('tools/check-training.lua');
 if (lauxlib.luaL_dostring(L, to_luastring(program)) !== lua.LUA_OK)
   throw new Error(to_jsstring(lua.lua_tostring(L, -1)));

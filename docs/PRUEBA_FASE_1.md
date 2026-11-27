@@ -1,4 +1,6 @@
-# Prueba manual pendiente: Fase 1
+# Prueba de Fase 1 — cerrada el 2026-11-26
+
+El dueño confirmó que el panel se ve bien y autorizó cerrar Fase 1 el 2026-11-26. La prueba del paso 5 pasa a la checklist de **Fase 7**, por instrucción expresa del dueño. Los pasos siguientes se conservan como guía de regresión.
 
 Usar únicamente **placeId `111090309292395`** (universeId `10779249165`), sin depender del nombre visible en Studio. El dueño confirmó ese ID, API Services activado y Rojo conectado. No crear copias ni guardar/publicar desde una IA. No usar otro ID ni un Place1 sin guardar.
 

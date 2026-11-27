@@ -1,5 +1,16 @@
 # Decisiones
 
+## 2026-11-26 · [codex] · Fase 1 cerrada y gym de Fase 2
+- **Qué:** el dueño confirma el panel y autoriza cerrar Fase 1 hoy; la prueba con API Services deshabilitado pasa a la checklist de Fase 7. La Fase 2 queda abierta hasta su recorrido manual.
+- **Qué:** balance aprobado en esta sesión: rondas de 20 s, descanso de 5 s y máximo +4 por cada stat asociado. Configuración en `Config/Training.lua`; premio entero redondeado según resultado limitado a [0,1]. Un resultado 0 da 0. No hay progreso de rango ni combate todavía.
+- **Por qué:** permite comparar fácilmente las cuatro estaciones y fija un límite verificable de ganancias. Cancelar no elimina el descanso; entrar a un servidor exige también 5 s antes de la primera ronda, para que reconectarse no permita ganar más rápido.
+- **Qué:** mapa de bloques creado por `GymService` al arrancar, en `Workspace.GymFromRepo`, con entrada, paredes, piso, espacio marcado para el futuro ring y dos puestos de cada tipo. Personajes aparecen en la entrada elevada, separada de la baseplate preexistente. No se crean lugares ni modelos externos.
+- **Qué:** el servidor usa ProximityPrompt.Triggered, comprueba distancia, vida, sesión cargada, ocupación y descanso; abre la ronda y acepta solo un número finito al terminar. Rechaza anticipos y duplicados, limita resultado/premio y cancela al morir, salir, alejarse o vencer la ventana de entrega. Los tres RemoteEvents están definidos en `src/ReplicatedStorage/Remotes/`.
+- **Límite deliberado:** el resultado cliente no prueba su habilidad; un cliente alterado puede declarar 1, pero no cobrar más de +4 por stat cada 25 s ni superar el rango. Es el contrato solicitado para esta fase; endurecimiento adicional queda para Fase 7. Referencia: [validación de entradas cliente en Roblox](https://create.roblox.com/docs/scripting/security/client-server-boundary).
+- **Qué:** minijuegos simples con Espacio y botón de pantalla: ritmo normal/rápido para Saco/Pera, sostener/soltar para Caminadora/Pesas. Fuente, colores y tamaños base desde Theme. El HUD de stats se oculta durante la ronda para no superponerse en celular.
+- **Asset 203785492:** encontrado dentro de `C:/Users/Carlos/AppData/Local/Roblox/Plugins/RojoManagedPlugin.rbxm`, tabla `Sounds.Notification`. Es del plugin Rojo, no del lugar ni del repo. Se deja intacto según instrucción del dueño. Búsqueda reproducible en `tools/find-plugin-asset.py`; también se revisaron propiedades y scripts del lugar sin coincidencias.
+- **Grafo:** Graphify 0.9.121 instalado con Python nativo temporal (MSYS no tenía ruedas compatibles). Generación local sin LLM: `graphify extract . --code-only --max-workers 1 --no-cluster` y `graphify cluster-only . --no-label`. Se versionan reporte/JSON/HTML; cachés y manifest local ignorados.
+
 ## 2026-11-26 · [claude] · Fase 1: HUD y pruebas desde MCP
 - **Qué:** el script del cliente pasó de `init.client.lua` a `StatsHUD.client.lua` y `default.project.json` declara `StarterPlayerScripts` con su clase.
 - **Por qué:** con `init.client.lua` dentro de la carpeta, Rojo intentaba convertir el propio `StarterPlayerScripts` en un LocalScript, chocaba con la clase real y el HUD nunca llegaba al juego.

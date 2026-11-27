@@ -2,4 +2,7 @@
 local Services = script.Parent.Services
 local PlayerData = require(Services.PlayerDataService)
 PlayerData.Start()
-require(Services.StudioDebug).Start(PlayerData)
+local stations, spawnCFrame = require(Services.GymService).Build()
+local Training = require(Services.TrainingService)
+Training.Start(PlayerData, stations, spawnCFrame)
+require(Services.StudioDebug).Start(PlayerData, Training)
