@@ -1,5 +1,12 @@
 # Bitácora
 
+## 2026-11-26 17:05 · [codex] · Fase 1
+- Qué hice: listé Studios con MCP. Ahora aparece un lugar guardado en modo Edit, «Lugar de zToT1x: 11262026_1», placeId 111090309292395, universeId 10779249165. Busqué set_active_studio: no está disponible; las herramientas seleccionan con studio_id. Intenté verificar el nombre de la experiencia mediante consulta pública, pero Roblox devuelve título oculto.
+- Archivos tocados: `docs/ESTADO.md`, `docs/BITACORA.md`.
+- Cómo probarlo: comprobación de disponibilidad e identidad en menos de 2 minutos. La conexión MCP funciona; el nombre no coincide con «box V1».
+- Qué quedó mal o pendiente: no se inició Play ni se ejecutaron los cambios de stats, autoguardado/reconexión, tope ni restauración. Falta confirmar que el ID corresponde al único lugar autorizado. No se tocó Place1 ni se crearon copias. Fase abierta; sin cambios de estructura.
+- Siguiente paso recomendado: confirmar con el dueño el placeId 111090309292395 y, si es «box V1», ejecutar la revisión solicitada usando studio_id.
+
 ## 2026-11-26 17:00 · [codex] · Fase 1
 - Qué hice: corregí el nombre del único lugar autorizado a «box V1» en AGENTS, ESTADO y guía de prueba, prohibiendo explícitamente Place1. Intenté seleccionar el lugar mediante MCP; list_roblox_studios devolvió una instancia sin nombre en modo Unavailable y «Place is not open». get_studio_state confirmó el bloqueo; corté la revisión en menos de 2 minutos.
 - Archivos tocados: `AGENTS.md`, `docs/ESTADO.md`, `docs/PRUEBA_FASE_1.md`, `docs/BITACORA.md`.

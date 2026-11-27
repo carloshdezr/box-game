@@ -18,7 +18,7 @@ Cada fase tiene su criterio de "terminado". No se pasa a la siguiente sin prueba
 Después de publicar (fuera de la v1): torneos, más rangos, cosméticos, monedas y tienda.
 
 ## Último en trabajar
-[codex] · 2026-11-26 17:00. Nombre del lugar corregido a «box V1». Prueba MCP bloqueada porque Studio reportó «Place is not open». Fase 1 sigue abierta.
+[codex] · 2026-11-26 17:05. MCP conectado, pero el lugar listado tiene otro nombre; pendiente confirmar identidad antes de Play. Fase 1 sigue abierta.
 
 ## Avance de Fase 1
 - [x] DataStore con UpdateAsync, autoguardado cada 60 segundos, salida y cierre del servidor.
@@ -31,12 +31,12 @@ Después de publicar (fuera de la v1): torneos, más rangos, cosméticos, moneda
 - [ ] Prueba manual del dueño: persistencia real, salida/cierre, fallo de carga y HUD en PC/celular. Guía: `docs/PRUEBA_FASE_1.md`.
 
 ## Problemas conocidos
-- El lugar autorizado es «box V1», guardado en Roblox con API Services activado y Rojo conectado según confirmación del dueño. El 2026-11-26 a las 17:00, el MCP solo devolvió una instancia sin nombre, modo Unavailable, «Place is not open»; get_studio_state confirmó lo mismo. No se inició Play ni se modificaron stats. Nunca usar «Place1».
+- El lugar autorizado es «box V1». El 2026-11-26 a las 17:05, el MCP ya lista un lugar en Edit guardado en Roblox: «Lugar de zToT1x: 11262026_1», placeId `111090309292395`, universeId `10779249165`. No hay entrada llamada «box V1»; la API pública oculta el título de la experiencia. Pendiente confirmar con el dueño que ese ID es el lugar autorizado. No se inició Play ni se modificaron stats. Esta versión del MCP selecciona por `studio_id`; no expone `set_active_studio`. Nunca usar «Place1».
 - Graphify no disponible; instalación temporal interrumpida al atascarse la resolución de dependencias. `graphify-out/GRAPH_REPORT.md` contiene un mapa manual actualizado, no una extracción automática. Pendiente regenerarlo con Graphify.
 - El ejecutable `rojo` en PATH es un shim de Rokit sin manifiesto; el sourcemap pasó usando el binario instalado de Rojo 7.7.1 directamente.
 
 ## Siguiente paso
-Restablecer la conexión MCP hasta que liste explícitamente «box V1». Luego realizar la revisión solicitada: stats iniciales/Listo/Output, Fuerza 37, esperar autoguardado, Stop/Play y persistencia en 37, tope 999→100 y restaurar Fuerza a 1. Todos esos pasos quedaron sin ejecutar por el bloqueo del MCP. Anotar resultados antes de cerrar Fase 1; mantener la prueba manual del dueño pendiente. Regenerar el grafo con Graphify cuando esté disponible. No iniciar Fase 2 todavía.
+Confirmar que placeId `111090309292395` corresponde a «box V1», o abrir el lugar correcto. Luego realizar la revisión solicitada: stats iniciales/Listo/Output, Fuerza 37, esperar autoguardado, Stop/Play y persistencia en 37, tope 999→100 y restaurar Fuerza a 1. Todos esos pasos siguen sin ejecutar. Anotar resultados antes de cerrar Fase 1; mantener la prueba manual del dueño pendiente. Regenerar el grafo con Graphify cuando esté disponible. No iniciar Fase 2 todavía.
 
 ## Preguntas pendientes
 - Jugadores por servidor (provisional 12).
