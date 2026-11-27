@@ -1,5 +1,12 @@
 # Decisiones
 
+## 2026-11-26 · [claude] · Fase 1: HUD y pruebas desde MCP
+- **Qué:** el script del cliente pasó de `init.client.lua` a `StatsHUD.client.lua` y `default.project.json` declara `StarterPlayerScripts` con su clase.
+- **Por qué:** con `init.client.lua` dentro de la carpeta, Rojo intentaba convertir el propio `StarterPlayerScripts` en un LocalScript, chocaba con la clase real y el HUD nunca llegaba al juego.
+- **Qué:** `Services/StudioDebug` crea, solo en Studio, una BindableFunction `ServerScriptService.StudioDebug` para cambiar stats y ver la sesión desde el MCP o la barra de comandos.
+- **Por qué:** un `require` hecho desde el MCP carga una copia aparte del módulo, sin sesiones; por eso `SetStat` devolvía `false` y `GetSnapshot` `nil` aunque el guardado funcionaba. Lo mismo pasó en oaxacos. Fuera de Studio no existe.
+- **Asset 203785492:** no aparece en el repo; viene de algo del lugar o de un plugin, no del código del juego. No bloquea la fase.
+
 ## 2026-11-26 · [codex] · Espera por candado de otra sesión
 - **Qué:** la carga mantiene `EstadoDatos = "Cargando"` mientras encuentra un candado ajeno vigente. Reintenta cada `LockRetrySeconds = 2`, dentro de un plazo total `LockWaitSeconds = 30` desde el inicio de la carga; ambos valores están en `Config/Persistence.lua`. Si se libera o vence a tiempo, carga el progreso original. Si sigue ocupado al agotar el plazo, marca `Error` sin escribir datos.
 - **Por qué:** una reconexión rápida puede llegar antes de que el servidor anterior termine de guardar y libere el candado. No debe fallar inmediatamente ni robar la sesión anterior.

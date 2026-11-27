@@ -1,5 +1,12 @@
 # Bitácora
 
+## 2026-11-26 17:20 · [claude] · Fase 1
+- Qué hice: corregí las dos fallas de la revisión de las 17:12. El HUD no aparecía porque `init.client.lua` hacía que Rojo convirtiera `StarterPlayerScripts` en un LocalScript; ahora es `StatsHUD.client.lua` y el proyecto declara la clase. `SetStat` devolvía `false` porque el `require` desde el MCP carga otra copia del módulo; agregué `Services/StudioDebug` (BindableFunction solo en Studio) y actualicé la guía.
+- Archivos tocados: `default.project.json`, `src/StarterPlayer/StarterPlayerScripts/StatsHUD.client.lua` (renombrado), `src/ServerScriptService/Main.server.lua`, `src/ServerScriptService/Services/StudioDebug.lua`, `docs/PRUEBA_FASE_1.md`, `docs/DECISIONES.md`, `docs/BITACORA.md`.
+- Cómo probarlo: reiniciar `rojo serve` (cambió el proyecto) y reconectar el plugin. En Play debe verse el panel de stats y existir `StarterPlayer.StarterPlayerScripts.StatsHUD`. Desde Server: `game.ServerScriptService.StudioDebug:Invoke("SetStat", nil, "Fuerza", 37)` devuelve `true`.
+- Qué quedó mal o pendiente: no probado en Studio desde este entorno. Pendientes los pasos de la guía (37, autoguardado/reconexión, tope 100, HUD en PC y celular). El error del asset 203785492 no viene del repo.
+- Siguiente paso recomendado: repetir la prueba de `docs/PRUEBA_FASE_1.md` en el placeId `111090309292395`.
+
 ## 2026-11-26 17:12 · [codex] · Fase 1
 - Qué hice: el dueño confirmó placeId `111090309292395` (universeId `10779249165`) como único lugar de pruebas. Actualicé AGENTS y documentos vigentes para seleccionar por ID, no por nombre. Los nombres en entradas anteriores se conservan como historia. Ejecuté Play en ese ID y detuve la revisión al trabarse, en 40 segundos.
 - Archivos tocados: `AGENTS.md`, `docs/ESTADO.md`, `docs/PRUEBA_FASE_1.md`, `docs/BITACORA.md`.

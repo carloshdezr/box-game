@@ -1,0 +1,31 @@
+-- Solo en Studio: deja que las pruebas (MCP o barra de comandos) usen los servicios
+-- que ya arrancó Main. Un require desde la barra de comandos o el MCP carga una copia
+-- nueva del módulo, sin las sesiones de los jugadores, y por eso SetStat devolvía false.
+-- Fuera de Studio no se crea nada.
+local RunService = game:GetService("RunService")
+local Players = game:GetService("Players")
+
+local StudioDebug = {}
+
+function StudioDebug.Start(playerData)
+	if not RunService:IsStudio() then
+		return
+	end
+	local bridge = Instance.new("BindableFunction")
+	bridge.Name = "StudioDebug"
+	bridge.OnInvoke = function(action, userId, name, value)
+		local player = Players:GetPlayerByUserId(userId or 0) or Players:GetPlayers()[1]
+		if not player then
+			return false, "SinJugador"
+		end
+		if action == "SetStat" then
+			return playerData.SetStat(player, name, value)
+		elseif action == "Snapshot" then
+			return playerData.GetSnapshot(player)
+		end
+		return false, "AccionDesconocida"
+	end
+	bridge.Parent = game:GetService("ServerScriptService")
+end
+
+return StudioDebug

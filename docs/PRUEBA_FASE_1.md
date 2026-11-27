@@ -3,16 +3,17 @@
 Usar únicamente **placeId `111090309292395`** (universeId `10779249165`), sin depender del nombre visible en Studio. El dueño confirmó ese ID, API Services activado y Rojo conectado. No crear copias ni guardar/publicar desde una IA. No usar otro ID ni un Place1 sin guardar.
 
 1. Entrar: ver Fuerza, Velocidad, Stamina y Defensa en 1, y rango Novato. En el jugador del servidor revisar también `PuntosRango = 0` y `EstadoDatos = "Listo"`.
-2. Para probar un cambio real antes de que exista el gym, ejecutar en la barra de comandos **del servidor durante Play**, sin editar scripts:
+2. Para probar un cambio real antes de que exista el gym, ejecutar **del lado del servidor durante Play** (MCP `execute_luau` en Server, o la barra de comandos en vista Server):
 
    ```lua
-   local p = game:GetService("Players"):GetPlayers()[1]
-   local data = require(game.ServerScriptService.Services.PlayerDataService)
-   print(data.SetStat(p, "Fuerza", 37))
+   local debug = game.ServerScriptService:WaitForChild("StudioDebug")
+   print(debug:Invoke("SetStat", nil, "Fuerza", 37))
    ```
 
+   No uses `require(PlayerDataService)` desde la barra o el MCP: carga una copia nueva del módulo sin las sesiones de los jugadores y siempre devuelve `false`. `StudioDebug` solo existe en Studio. `debug:Invoke("Snapshot")` devuelve los datos de la sesión.
+
 3. Ver Fuerza 37 en la interfaz. Esperar más de 60 segundos para el autoguardado, salir y volver: debe seguir en 37. Cambiar otro stat, detener Play antes del siguiente autoguardado y volver para comprobar el guardado al cerrar.
-4. En el servidor, `SetStat(p, "Fuerza", 999)` debe mostrar 100 (tope Novato). Cambiar un atributo directamente no modifica los datos guardados. Al terminar la revisión solicitada por el dueño, restaurar Fuerza a 1 mediante `SetStat` y salir para guardar.
+4. En el servidor, `debug:Invoke("SetStat", nil, "Fuerza", 999)` debe mostrar 100 (tope Novato). Cambiar un atributo directamente no modifica los datos guardados. Al terminar la revisión solicitada por el dueño, restaurar Fuerza a 1 con el mismo comando y salir para guardar.
 5. Con acceso a API Services deshabilitado por el dueño, entrar: aparece exactamente **Tu progreso no se está guardando**. No se permite modificar el progreso con `SetStat`; salir no guarda valores iniciales. Rehabilitar acceso y entrar: recuperar los datos anteriores.
 6. Revisar que el panel no tape los controles y se lea en PC y celular. Anotar fecha y resultado en `ESTADO.md`; solo entonces cerrar la fase.
 
