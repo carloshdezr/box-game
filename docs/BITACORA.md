@@ -1,5 +1,12 @@
 # Bitácora
 
+## 2026-11-28 03:16 · [codex] · Fase 2
+- Qué hice: git pull origin main trajo 27b9739; revisé reglas, estado, últimas entradas, diseño/decisiones, grafo e imagen objetivo. A–D descartadas. Monté dos propuestas R15 con HumanoidDescription y artículos de catálogo; capturas frente/lado, referencia al lado en HTML y Flaco/Bestia con la misma malla. Documenté 4 caras, 6 pelos, 4 colores, autores y respaldos. Parte B no iniciada.
+- Archivos tocados: docs/ESTILO_BOXEADOR.md, docs/referencias/estilo-final/ (seis JPEG y comparación HTML), docs/{ESTADO,DECISIONES,BITACORA,CUERPOS_FASE_2}.md. Sin cambios en src ni configuración de Rojo. graphify-out actualizado al regenerar reporte; extracción code-only sin cambios de código.
+- Cómo probarlo: abrir docs/referencias/estilo-final/comparacion.html y consultar las tablas de catálogo. Studio autorizado 111090309292395: revisión inicial detenida por visor negro; dueño trajo Studio al frente. Revisiones Play de 81 s y 54 s; se observaron cuerpo, cara explícita y diferencia de ancho entre Flaco/Bestia. Catálogo/autoría consultados por MCP.
+- Qué quedó mal o pendiente: tenis deformados en capas y parcialmente ocultos tras ajuste rígido fallido; camiseta abultada, puños grandes y acentos azules pendientes. No afirmar parecido exacto ni combinación lista para producción. Tres caras, dos pelos y colores rojo/blanco solo tienen ficha verificada, no prueba puestos. No hubo edición de scripts ni cambios intencionales de stats/apariencia. Modelos temporales retirados y cámara restaurada; Studio en Edit, sin guardar/publicar ni crear copias.
+- Siguiente paso recomendado: dueño revisa siluetas y propone ajustes; resolver calzado/ropa y obtener aprobación antes de Parte B. Fase 2 sigue abierta.
+
 ## 2026-11-28 03:05 · [claude] · Diseño
 - Qué hice: guardé la imagen de referencia del estilo que quiere la persona dueña (`docs/referencias/estilo-objetivo.png`) y actualicé diseño y decisiones: Roblox clásico suavizado con toque anime. Las opciones A–D quedan descartadas.
 - Archivos tocados: `docs/referencias/estilo-objetivo.png`, `docs/DISENO_JUEGO.md`, `docs/DECISIONES.md`, `docs/BITACORA.md`.

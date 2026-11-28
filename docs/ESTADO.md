@@ -1,14 +1,14 @@
 # Estado actual del proyecto
 
 ## Fase actual
-Fase 2 en revisión por el cambio de diseño del 2026-11-28. **Parte A preparada: cuatro cuerpos de catálogo con capturas y propuesta de progresión, pendientes de elección del dueño. Parte B no iniciada.** El rig de bloques y las poses procedurales anteriores siguen en producción hasta esa elección. Minijuegos intactos; se reemplazan en Fase 3.
+Fase 2 abierta. Estilo definitivo de la referencia Roblox + anime; A–D descartadas. Parte A: dos variantes nuevas, frente/lado y Flaco/Bestia en docs/ESTILO_BOXEADOR.md. Calzado y detalles de ropa pendientes; no hay aprobación visual. Parte B no iniciada.
 
 ## Checklist de fases
 Cada fase tiene su criterio de "terminado". No se pasa a la siguiente sin prueba manual de la persona dueña anotada aquí.
 
 - [x] **Fase 0: idea y diseño.** Criterio: `DISENO_JUEGO.md` completo. Hecho el 2026-11-26.
 - [x] **Fase 1: datos y stats.** Criterio: un jugador entra, ve sus 4 stats y su rango, y al salir y volver siguen igual. Cerrada el 2026-11-26: persistencia validada en Studio y dueño confirma que el panel se ve bien y autoriza cierre.
-- [ ] **Fase 2: boxeador propio y animaciones.** Criterio: todos entran con el boxeador del juego (no su avatar), con cuerpo de malla redondeado estilo avatar moderno de Roblox, no de bloques; la primera vez eligen tono de piel, cabello, cara y color de shorts y se guarda; el cuerpo crece visiblemente con los stats (niveles de físico); hay animaciones KeyframeSequence (no movidas con código) de guardia, jab, gancho, uppercut, correr y cansado, con peso y giro de cadera; la persona dueña aprueba cómo se ven.
+- [ ] **Fase 2: boxeador propio y animaciones.** Criterio: todos entran con el boxeador del juego (no su avatar), con cuerpo clásico Roblox suavizado, robusto y chaparrito, cara caricaturesca, pelo anime, camiseta sin mangas, shorts, guantes grandes y tenis altos según la referencia definitiva; la primera vez eligen tono de piel, cabello, cara y color de shorts y se guarda; el cuerpo crece visiblemente con los stats (niveles de físico); hay animaciones KeyframeSequence (no movidas con código) de guardia, jab, gancho, uppercut, correr y cansado, con peso y giro de cadera; la persona dueña aprueba cómo se ven.
 - [ ] **Fase 3: gym jugable.** Criterio: caminadora con W y cinta que cambia de velocidad (te caes si te quedas atrás); saco con clic y golpes animados que mueven el saco; pesas con clic por repetición y ritmo; pera con golpes izquierda/derecha; barra de energía que se gasta y se recupera; stats suben según lo que haces, con límites del servidor y sin pasar el tope del rango. Se reutiliza el gym, la ocupación y el control de premios hechos antes.
 - [ ] **Fase 4: combate contra NPC.** Criterio: en el ring puedes pelear 3 rounds contra un NPC con jab, gancho, uppercut, bloquear y esquivar, usando los mismos golpes del saco; las barras de vida y stamina funcionan y la pelea termina con un ganador.
 - [ ] **Fase 5: rangos y rivales.** Criterio: ganar peleas da puntos de rango; subes de Novato a Amateur y a Semi-pro; cada rango tiene su rival NPC, su tope de stats y equipo de gym mejor.
@@ -22,15 +22,16 @@ Después de publicar (fuera de la v1): torneos, más rangos, cosméticos, moneda
 - [ ] Desactivar API Services, comprobar «Tu progreso no se está guardando», rechazo de premios y ausencia de sobrescritura; reactivar y recuperar progreso. Trasladada desde Fase 1 por instrucción del dueño el 2026-11-26.
 
 ## Último en trabajar
-[codex] · 2026-11-28 02:53. Parte A: capturas A Glenn, B Athletic Muscle Man, C Athletic Muscle Body de adidas, D Superhero. Comparación/propuesta en `docs/CUERPOS_FASE_2.md`. Rojo reconectado y sincronización de creación/retirada verificada en 127.0.0.1:34872.
+[codex] · 2026-11-28 03:16. Dos propuestas nuevas con capturas reales y catálogo de 4 caras, 6 peinados y 4 colores, autores y respaldos. Revisiones Play 81 s y 54 s. Ajuste de tenis fallido; fase abierta.
 
-## Rehacer Fase 2 (diseño de malla y KeyframeSequence)
-- [x] Parte A: cuerpos redondeados del catálogo cargados con HumanoidDescription, cabeza con cara, shorts y cobertura provisional de vendas. Cuatro capturas reales en `docs/referencias/fase2-a/`.
-- [x] Propuesta de cuerpos distintos y escala para los cinco niveles en `docs/CUERPOS_FASE_2.md`; Bestia es candidato adicional con ficha consultada, sin validación visual todavía.
-- [x] Diagnóstico de Rojo: fallos ConnectFail previos a localhost; conexión actual a 127.0.0.1 confirmada mediante sonda temporal creada/retirada automáticamente. No cambiaron scripts del juego.
-- [ ] Dueño elige A/B/C/D y aprueba o ajusta la progresión. No avanzar a Parte B hasta recibir esa elección.
-- [ ] Parte B: BoxerRig con HumanoidDescription, compatibilidad de apariencia guardada, seis KeyframeSequence con peso/anticipación y `docs/SUBIR_ANIMACIONES.md`.
-- [ ] Aprobación visual/manual del dueño antes de cerrar Fase 2.
+## Rehacer Fase 2: estilo definitivo Roblox + anime
+- [x] A–D descartadas por el dueño; comparación anterior conservada como histórica.
+- [x] Dos cuerpos de catálogo con HumanoidDescription, capturas de frente/lado junto a la referencia: docs/ESTILO_BOXEADOR.md y su comparación HTML.
+- [x] Propuesta de cinco niveles con el mismo cuerpo; capturas de Flaco y Bestia. Cuatro caras, seis peinados, cuatro colores y autoría/respaldo documentados.
+- [ ] Resolver tenis deformados/ocultos, camiseta abultada, puños demasiado abiertos y acentos de la referencia. Las capturas no certifican compatibilidad final.
+- [ ] Dueño aprueba estilo y escalas. No avanzar a Parte B todavía.
+- [ ] Parte B: BoxerRig con HumanoidDescription, apariencia persistida compatible, seis KeyframeSequence y docs/SUBIR_ANIMACIONES.md.
+- [ ] Prueba manual y aprobación visual antes de cerrar Fase 2.
 
 ## Avance de Fase 2: boxeador y animaciones
 Histórico de la primera implementación: las comprobaciones siguientes no satisfacen el criterio nuevo de mallas y KeyframeSequence.
@@ -74,9 +75,9 @@ Histórico de la primera implementación: las comprobaciones siguientes no satis
 - El ejecutable `rojo` en PATH es un shim de Rokit sin manifiesto; el sourcemap pasó usando el binario instalado de Rojo 7.7.1 directamente.
 
 ## Siguiente paso
-El dueño elige A/B/C/D en `docs/CUERPOS_FASE_2.md` y confirma o ajusta la progresión; después se implementa Parte B. La guía PRUEBA_FASE_2 anterior se actualizará al implementar el nuevo rig. Studio quedó en Edit, sin modelos temporales; cámara/FOV restaurados. Rojo conectado en 127.0.0.1:34872. No se modificó el progreso ni la apariencia guardada. No iniciar Fase 3. La prueba sin API Services sigue en Fase 8.
+Revisar docs/ESTILO_BOXEADOR.md y la comparación visual. Resolver el calzado y acordar ajustes de la variante preferida antes de Parte B. Studio quedó en Edit, sin modelos temporales y cámara restaurada; no se guardó/publicó el lugar. Scripts y minijuegos intactos. No iniciar Fase 3.
 
 ## Preguntas pendientes
-- Elección visual A/B/C/D y aprobación de la progresión propuesta en CUERPOS_FASE_2; requisito explícito del dueño antes de Parte B.
+- Preferencia entre las nuevas siluetas V1/V2 y escalas; ¿qué ajustes visuales pide el dueño? No hay aprobación de ninguna. Tenis y detalles de ropa siguen pendientes.
 - Jugadores por servidor (provisional 12).
 - Nombre definitivo del juego.

@@ -1,5 +1,11 @@
 # Decisiones
 
+## 2026-11-28 · [codex] · Comparación del estilo definitivo, sin Parte B
+- Qué: se descartan A–D y se comparan Smooth Blocky 1.0 y Short Round Blocky con HumanoidDescription. Propuesta de físico con una sola malla y escala creciente, no cuerpos distintos. Catálogo y capturas en ESTILO_BOXEADOR.md. Ninguna propuesta se considera aprobada.
+- Por qué: acercar la silueta a la referencia del dueño conservando identidad al crecer. Cabeza clásica explícita 746767604: Head=0 produjo cabeza dinámica sin la cara clásica deseada.
+- Limitaciones: las capas deformaron los tenis; el intento de ajuste rígido también falló. No incorporar ese montaje a producción. Faltan ropa/acentos y ajuste de guantes. No prolongar revisiones indefinidamente.
+- Respaldo propuesto: alternativa por categoría con pcall y base propia si falla; no alterar selección persistida por una caída de catálogo. Identificar Roblox/terceros y distinguir ficha verificada de ajuste probado. No implementado todavía.
+
 ## 2026-11-28 · [claude] · Estilo final del boxeador: Roblox con toque anime
 - **Qué:** el estilo objetivo es el de `docs/referencias/estilo-objetivo.png`: cuerpo de Roblox clásico suavizado y robusto, cara de caricatura expresiva, peinado anime en picos, camiseta sin mangas, shorts, guantes grandes y tenis altos. Reemplaza las opciones de cuerpos realistas (A–D) de `CUERPOS_FASE_2.md`.
 - **Por qué:** la persona dueña vio las capturas y prefiere la mezcla Roblox + anime que se ve en los juegos de Roblox, no anatomía realista.

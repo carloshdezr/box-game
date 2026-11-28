@@ -1,5 +1,7 @@
 # Fase 2 — Parte A: elegir cuerpo
 
+> HISTÓRICO: el dueño descartó A–D el 2026-11-28. Ver [estilo definitivo y nuevas propuestas](ESTILO_BOXEADOR.md). No usar esta progresión de cuerpos distintos.
+
 Propuesta del 2026-11-28. **Pendiente de elección del dueño; no implementar Parte B todavía.** Capturas reales del placeId `111090309292395`, no renders generados. El código del juego no cambió.
 
 ## Cuatro opciones probadas
