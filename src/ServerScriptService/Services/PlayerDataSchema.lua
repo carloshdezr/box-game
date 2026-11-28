@@ -1,5 +1,6 @@
 local Config = require(game:GetService("ReplicatedStorage").Config.Stats)
 local Persistence = require(game:GetService("ReplicatedStorage").Config.Persistence)
+local Appearance = require(game:GetService("ReplicatedStorage").Config.Appearance)
 local Schema = {}
 
 local function validNumber(value)
@@ -28,6 +29,8 @@ function Schema.Validate(data)
 			return false
 		end
 	end
+	-- Optional field keeps every v1 record compatible; invalid choices fail closed.
+	if data.Appearance ~= nil and not Appearance.Validate(data.Appearance) then return false end
 	return true
 end
 

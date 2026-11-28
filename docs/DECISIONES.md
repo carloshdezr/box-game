@@ -1,5 +1,13 @@
 # Decisiones
 
+## 2026-11-28 · [codex] · Implementación del boxeador (Fase 2)
+- **Qué:** cinco físicos por promedio de los cuatro stats: Flaco 1, Atlético 25, Marcado 75, Musculoso 150, Bestia 300. Umbrales aprobados explícitamente por el dueño en esta sesión. Physique.lua concentra umbrales y tamaños; Fuerza agrega hasta 0.2 a los multiplicadores de anchura del torso/brazos para reflejar su entrenamiento específico.
+- **Qué:** R15 propio de 15 piezas y HumanoidRootPart generado por BoxerRig, con Motor6D y escala manual de tamaños/anclajes en el servidor. Shorts por color de cintura/muslos, vendas, tenis, cabello y cara con piezas; tres opciones por campo en Appearance. No se consulta el avatar del usuario ni se requieren assets subidos. Arte provisional de bloques; texturas musculares y arte final siguen en Fase 7.
+- **Qué:** Appearance opcional en el registro v1 existente, con índices validados por lista permitida. Un registro sin campo conserva sus stats y abre el creador; datos inválidos fallan sin sobrescribir. Elección única, copiada defensivamente y guardada inmediatamente con el mismo candado/UpdateAsync, además de autoguardado/salida/cierre. No se cambia StoreName ni se reinicia progreso.
+- **Qué:** BoxerAnimations.Sample/Bind calcula poses y transforma articulaciones en PreSimulation en cada cliente, para todos los personajes. El servidor elige alternancia y publica nombre/hora de golpe, con frecuencia configurable; nunca acepta transformaciones del cliente. Los tamaños se replican desde servidor. Motivo: [Motor6D.Transform no se replica](https://create.roblox.com/docs/reference/engine/classes/Motor6D/Transform); replicar la acción evita enviar cada articulación por frame.
+- **Alcance:** golpes solo visuales y velocidad fija provisional en Config/Boxer; energía, cansancio automático y velocidad según stats pertenecen a Fase 3. Cansado disponible en el módulo y StudioDebug. Los minijuegos no se tocaron; su guía anterior se conserva en PRUEBA_GYM_ANTERIOR.md.
+- **Sincronización:** Rojo arrancado oculto, Connect confirmado por dueño; MCP comprobó que seguían las fuentes antiguas. Se sincronizaron las fuentes exactas del repo mediante la alternativa MCP. Lugar único por ID; sin guardar/publicar.
+
 ## 2026-11-28 · [claude] · Gym jugable y boxeador propio
 - **Qué:** los minijuegos de barra ("picarle al verde") se reemplazan por entrenamiento físico: caminadora con W, saco con clic y golpes animados, pesas por repetición y pera izquierda/derecha, con una barra de Energía que se gasta y se recupera. Pedido por la persona dueña.
 - **Por qué:** se siente más a juego y menos a menú; además el saco usa el mismo sistema de golpes que el combate.

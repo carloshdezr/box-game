@@ -7,7 +7,7 @@ local Players = game:GetService("Players")
 
 local StudioDebug = {}
 
-function StudioDebug.Start(playerData, training)
+function StudioDebug.Start(playerData, training, boxer)
 	if not RunService:IsStudio() then
 		return
 	end
@@ -22,6 +22,14 @@ function StudioDebug.Start(playerData, training)
 			return playerData.SetStat(player, name, value)
 		elseif action == "Snapshot" then
 			return playerData.GetSnapshot(player)
+		elseif action == "ChooseAppearance" then
+			return playerData.SetAppearance(player, value)
+		elseif action == "Punch" and boxer then
+			return boxer.Punch(player, name)
+		elseif action == "Pose" and player.Character then
+			if name ~= nil and name ~= "Cansado" and name ~= "Correr" then return false end
+			player.Character:SetAttribute("PoseDebug", name)
+			return true
 		elseif action == "TrainingStart" and training then
 			return training.Begin(player, name)
 		elseif action == "TrainingFinish" and training then

@@ -1,7 +1,7 @@
 # Estado actual del proyecto
 
 ## Fase actual
-Fase 2: boxeador propio y animaciones. El 2026-11-28 el dueño pidió un gym más jugable (W en caminadora, golpes reales con cansancio) y un personaje propio que crece; los minijuegos de barra de la versión anterior se reemplazan en la Fase 3.
+Fase 2: boxeador propio y animaciones implementados el 2026-11-28, pendientes de prueba manual del dueño. Los minijuegos actuales no se modificaron; se reemplazan en Fase 3.
 
 ## Checklist de fases
 Cada fase tiene su criterio de "terminado". No se pasa a la siguiente sin prueba manual de la persona dueña anotada aquí.
@@ -22,7 +22,16 @@ Después de publicar (fuera de la v1): torneos, más rangos, cosméticos, moneda
 - [ ] Desactivar API Services, comprobar «Tu progreso no se está guardando», rechazo de premios y ausencia de sobrescritura; reactivar y recuperar progreso. Trasladada desde Fase 1 por instrucción del dueño el 2026-11-26.
 
 ## Último en trabajar
-[codex] · 2026-11-26. Fase 1 cerrada por el dueño; Fase 2 implementada y sincronizada, pendiente recorrido manual. Asset 203785492 identificado como sonido del plugin Rojo.
+[codex] · 2026-11-28. Boxeador R15 propio, apariencia persistida, físico por stats y animaciones por articulaciones. Validaciones rápidas de 50 s y 44 s en el placeId autorizado; falta recorrido manual.
+
+## Avance de Fase 2: boxeador y animaciones
+- [x] R15 propio generado desde el repo: shorts, vendas, tenis, cabello y cara de bloques; ningún avatar personal ni asset/animación subido.
+- [x] Creador con vista previa y tres opciones por campo en Config/Appearance; servidor valida y PlayerDataService guarda inmediatamente y en sus guardados habituales. Registros v1 sin apariencia siguen siendo compatibles; no se sobrescriben registros inválidos.
+- [x] Cinco niveles en Config/Physique: promedios 1/25/75/150/300 aprobados por el dueño; tamaño adicional de brazos/hombros por Fuerza. Cambios de tamaño en servidor replicados en vivo.
+- [x] Módulo reutilizable de guardia, jab, gancho, uppercut, correr y cansado. Clic izquierdo alternado/clic derecho y botones táctiles; servidor controla frecuencia, sin daño ni premios. Cansado disponible para Fase 3 y mediante StudioDebug, todavía sin sistema de energía.
+- [x] 2026-11-28: creador y selección por botones; Flaco→Marcado mediante StudioDebug; reconexión conserva apariencia y no vuelve a preguntar; W mueve/anima; golpes observados en fotogramas; cansado y reaparición correctos. Rechazo de duplicados/nombre inválido. Stats restaurados a 1, Studio en Edit.
+- [x] Rojo arrancado en localhost:34872. Tras Connect confirmado, Studio seguía con fuentes antiguas; se aplicó alternativa MCP con las fuentes exactas del repo. No se guardó/publicó ni se crearon copias de lugar.
+- [ ] Prueba manual del dueño: `docs/PRUEBA_FASE_2.md`; dos clientes reales y toque real. Musculoso/Bestia verificados por configuración/pruebas locales, aún sin revisión visual en sesión de jugador (Novato tiene tope 100).
 
 ## Base ya hecha (versión anterior del gym, se reutiliza en la Fase 3)
 - [x] Gym generado desde src: entrada, piso, paredes, ring futuro marcado y ocho puestos (dos de cada tipo), con letreros de ocupación.
@@ -31,7 +40,7 @@ Después de publicar (fuera de la v1): torneos, más rangos, cosméticos, moneda
 - [x] Balance aprobado: 20 s, 5 s de descanso y máximo +4 por stat; parámetros en Training.lua. El servidor limita score, duración, frecuencia y premio, usando PlayerDataService.
 - [x] Validaciones locales y Studio: Saco/Fuerza+Velocidad, Caminadora/Stamina, Pesas/Fuerza+Defensa, Pera/Velocidad+Defensa; paneles y resultados correctos, 99→100 y aviso. Resultados simulados desde StudioDebug tras duración real; no se completaron manualmente todas las rondas.
 - [x] Entrada real por prompt E, barra de Caminadora y repetición de Pesas con teclado; panel/botón en celular emulado, cancelación mantiene descanso. Stats de prueba restaurados a 1.
-- [ ] Prueba manual del dueño con teclado, toque real, dos jugadores y persistencia de premios. Guía: `docs/PRUEBA_FASE_2.md`.
+- [ ] Prueba manual del dueño con teclado, toque real, dos jugadores y persistencia de premios. Guía histórica: `docs/PRUEBA_GYM_ANTERIOR.md`; el nuevo entrenamiento corresponde a Fase 3.
 
 ## Avance de Fase 1
 - [x] DataStore con UpdateAsync, autoguardado cada 60 segundos, salida y cierre del servidor.
@@ -56,7 +65,7 @@ Después de publicar (fuera de la v1): torneos, más rangos, cosméticos, moneda
 - El ejecutable `rojo` en PATH es un shim de Rokit sin manifiesto; el sourcemap pasó usando el binario instalado de Rojo 7.7.1 directamente.
 
 ## Siguiente paso
-El dueño realiza `docs/PRUEBA_FASE_2.md` y registra fecha/resultados antes de cerrar Fase 2. No iniciar combate/Fase 3. Studio quedó en Edit, viewport normal y stats en 1; Rojo continúa en localhost:34872. La prueba sin API Services corresponde ahora a Fase 7.
+El dueño realiza `docs/PRUEBA_FASE_2.md` y registra fecha/resultados antes de cerrar Fase 2. No iniciar el gym jugable/Fase 3 todavía. Studio quedó en Edit y stats en 1; Rojo continúa en localhost:34872. La cuenta de pruebas conserva piel Media, Cresta, Sonrisa y shorts Azules. La prueba sin API Services corresponde a Fase 8 tras la renumeración del diseño.
 
 ## Preguntas pendientes
 - Jugadores por servidor (provisional 12).

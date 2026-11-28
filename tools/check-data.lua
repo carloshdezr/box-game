@@ -54,7 +54,7 @@ local function setup()
     function players:GetPlayers() return {} end
     local services = {
         Players = players,
-        ReplicatedStorage = { Config = {Stats = "Stats", Persistence = "Persistence"} },
+        ReplicatedStorage = { Config = {Stats = "Stats", Persistence = "Persistence", Appearance = "Appearance"} },
         DataStoreService = {GetDataStore = function() return storage end},
         HttpService = {GenerateGUID = function() guid = guid + 1 return tostring(guid) end},
     }
@@ -62,6 +62,7 @@ local function setup()
         BindToClose = function(self, fn) self.close = fn end}
     script = {Parent = {PlayerDataSchema = "Schema"}}
     local modules = {Stats = assert(load(statsSource))(), Persistence = assert(load(configSource))()}
+    modules.Appearance = assert(load(appearanceSource))()
     require = function(name) return assert(modules[name], name) end
     modules.Schema = assert(load(schemaSource))()
     local service = assert(load(serviceSource))()
@@ -202,3 +203,46 @@ advance(4)
 assert(db.records.Player_6 == nil or db.records.Player_6.Session == nil,
     "load/leave/close overlap must cancel acquisition or release")
 print("PASS: load/leave/shutdown overlap; all game scripts parse")
+
+db, service, join, leave, advance, modules = setup()
+local legacy = modules.Schema.New()
+legacy.Fuerza = 37
+db.records.Player_7 = legacy
+p = join(7)
+assert(p:GetAttribute("Fuerza") == 37 and p:GetAttribute("AparienciaElegida") == false)
+assert(not service.SetAppearance(p, { Piel = 99, Cabello = 1, Cara = 1, Shorts = 1 }))
+assert(not service.SetAppearance(p, { Piel = 1, Cabello = 1, Cara = 1, Shorts = 1, Extra = 1 }))
+local choice = { Piel = 3, Cabello = 2, Cara = 3, Shorts = 2 }
+assert(service.SetAppearance(p, choice))
+choice.Piel = 1
+assert(db.records.Player_7.Appearance.Piel == 3 and db.records.Player_7.Fuerza == 37)
+local snapshot = service.GetSnapshot(p)
+snapshot.Appearance.Piel = 1
+assert(service.GetSnapshot(p).Appearance.Piel == 3, "snapshot must not expose nested data")
+assert(not service.SetAppearance(p, choice), "cannot replace first selection")
+leave(p)
+p = join(7)
+assert(p:GetAttribute("AparienciaElegida") and p:GetAttribute("AparienciaPiel") == 3)
+assert(service.GetSnapshot(p).Appearance.Cara == 3)
+local corrupt = modules.Schema.New()
+corrupt.Appearance = { Piel = 0, Cabello = 1, Cara = 1, Shorts = 1 }
+db.records.Player_8 = corrupt
+local writes = db.writes
+local bad = join(8)
+assert(bad:GetAttribute("EstadoDatos") == "Error" and db.writes == writes)
+assert(not service.SetAppearance(bad, choice))
+print("PASS: legacy migration, appearance validation, immediate save, immutable selection, nested snapshot, reconnect, corrupt data protected")
+
+local physique = assert(load(physiqueSource))()
+for index, threshold in ipairs({ 1, 25, 75, 150, 300 }) do
+    local level = physique.Resolve({ Fuerza=threshold, Velocidad=threshold, Stamina=threshold, Defensa=threshold })
+    assert(level == physique.Levels[index])
+    if index > 1 then
+        local previous = physique.Resolve({ Fuerza=threshold-1, Velocidad=threshold-1, Stamina=threshold-1, Defensa=threshold-1 })
+        assert(previous == physique.Levels[index-1])
+    end
+end
+local _, low = physique.Resolve({ Fuerza = 1 })
+local _, high = physique.Resolve({ Fuerza = 500 })
+assert(low == 0 and high == physique.StrengthWidthBonus)
+print("PASS: five physique thresholds and strength bonus")

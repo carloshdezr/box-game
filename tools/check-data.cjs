@@ -22,6 +22,8 @@ function scan(dir) {
 scan(path.join(root, 'src'));
 const files = {
   statsSource: 'src/ReplicatedStorage/Config/Stats.lua',
+  appearanceSource: 'src/ReplicatedStorage/Config/Appearance.lua',
+  physiqueSource: 'src/ReplicatedStorage/Config/Physique.lua',
   configSource: 'src/ReplicatedStorage/Config/Persistence.lua',
   schemaSource: 'src/ServerScriptService/Services/PlayerDataSchema.lua',
   serviceSource: 'src/ServerScriptService/Services/PlayerDataService.lua',

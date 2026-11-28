@@ -3,6 +3,7 @@ local DataStoreService = game:GetService("DataStoreService")
 local HttpService = game:GetService("HttpService")
 local Config = require(game:GetService("ReplicatedStorage").Config.Persistence)
 local Stats = require(game:GetService("ReplicatedStorage").Config.Stats)
+local Appearance = require(game:GetService("ReplicatedStorage").Config.Appearance)
 local Schema = require(script.Parent.PlayerDataSchema)
 
 local Service = {}
@@ -21,6 +22,10 @@ local function publish(player, data)
 	end
 	player:SetAttribute("Rango", data.Rango)
 	player:SetAttribute("PuntosRango", data.PuntosRango)
+	for _, field in ipairs(Appearance.Fields) do
+		player:SetAttribute("Apariencia" .. field, data.Appearance and data.Appearance[field])
+	end
+	player:SetAttribute("AparienciaElegida", data.Appearance ~= nil)
 end
 
 local function update(key, callback, deadline)
@@ -156,7 +161,21 @@ function Service.GetSnapshot(player)
 	if not session or not session.loaded or session.finishing then
 		return nil
 	end
-	return table.clone(session.data)
+	local snapshot = table.clone(session.data)
+	if snapshot.Appearance then snapshot.Appearance = table.clone(snapshot.Appearance) end
+	return snapshot
+end
+
+function Service.SetAppearance(player, choice)
+	local session = sessions[player]
+	if not session or not session.loaded or session.finishing or closing
+		or player:GetAttribute("EstadoDatos") ~= "Listo" or session.data.Appearance
+		or not Appearance.Validate(choice) then return false end
+	-- Copy input before yielding; selection is immutable and cannot race a second request.
+	session.data.Appearance = table.clone(choice)
+	publish(player, session.data)
+	save(player, session, false)
+	return true
 end
 
 function Service.SetStat(player, name, value)

@@ -19,6 +19,14 @@ return {
 	TrainingHeight = 290,
 	TrainingScale = 0.92,
 	ButtonHeight = 52,
+	CreatorWidth = 620,
+	CreatorHeight = 390,
+	Boxer = {
+		Hair = Color3.fromRGB(39, 29, 31),
+		Ink = Color3.fromRGB(30, 35, 48),
+		Wraps = Color3.fromRGB(250, 242, 219),
+		Shoes = Color3.fromRGB(37, 53, 74),
+	},
 	Gym = {
 		Floor = Color3.fromRGB(231, 224, 206),
 		Wall = Color3.fromRGB(101, 191, 198),
