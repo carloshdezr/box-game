@@ -1,128 +1,121 @@
--- A repo-owned 15-part R15 rig: no avatar lookup, catalog assets or uploaded animations.
-local Config = script.Parent.Config
-local Appearance = require(Config.Appearance)
-local Physique = require(Config.Physique)
-local Theme = require(Config.Theme)
-local Settings = require(Config.Boxer)
-local Rig = {}
+local Players=game:GetService("Players")
+local Config=script.Parent.Config
+local Appearance=require(Config.Appearance)
+local Physique=require(Config.Physique)
+local Catalog=require(Config.BoxerCatalog)
+local Settings=require(Config.Boxer)
+local Rig={}
+local function key(c) return table.concat({c.Piel,c.Cabello,c.Cara,c.Shorts},":") end
 
-local function joint(model, name, parent, child, c0, c1)
-	local motor = model[child]:FindFirstChild(name)
-	if not motor then
-		motor = Instance.new("Motor6D")
-		motor.Name, motor.Part0, motor.Part1 = name, model[parent], model[child]
-		motor.Parent = model[child]
-	end
-	motor.C0, motor.C1 = CFrame.new(c0), CFrame.new(c1)
+function Rig.Description(data,fallback)
+ local c=data.Appearance or Appearance.Default
+ local level,strength=Physique.Resolve(data)
+ local d=Instance.new("HumanoidDescription")
+ if not fallback then for part,id in pairs(Catalog.Body) do d[part]=id end end
+ d.Head=Catalog.Head
+ d.Face=fallback and Catalog.FallbackFace or Appearance.Cara[c.Cara].Asset
+ d.WidthScale,d.DepthScale,d.HeightScale=level.Width+strength,level.Depth,level.Height
+ d.HeadScale,d.BodyTypeScale,d.ProportionScale=1,0,0
+ local skin=Color3.fromRGB(table.unpack(Appearance.Piel[c.Piel].Color))
+ for _,name in ipairs({"HeadColor","TorsoColor","LeftArmColor","RightArmColor","LeftLegColor","RightLegColor"}) do d[name]=skin end
+ d:SetAccessories({
+  {AssetId=fallback and Catalog.FallbackHair or Appearance.Cabello[c.Cabello].Asset,AccessoryType=Enum.AccessoryType.Hair},
+  {AssetId=Catalog.Tank,AccessoryType=Enum.AccessoryType.TShirt,Order=1,IsLayered=true},
+  {AssetId=fallback and Catalog.FallbackShorts or Appearance.Shorts[c.Shorts].Asset,AccessoryType=Enum.AccessoryType.Shorts,Order=2,IsLayered=true},
+ },true)
+ return d
 end
 
-function Rig.Scale(model, data)
-	local level, strength = Physique.Resolve(data)
-	local height, width, arms = level.Height, level.Torso + strength, level.Arms + strength
-	local sizes = {
-		HumanoidRootPart = Vector3.new(2, 2, 1), Head = Vector3.new(1.4, 1.2, 1.2),
-		UpperTorso = Vector3.new(1.8 * width, 1.4 * height, 0.85 * level.Torso),
-		LowerTorso = Vector3.new(1.25 * level.Torso, 0.65 * height, 0.75 * level.Torso),
-	}
-	for _, side in ipairs({ "Left", "Right" }) do
-		sizes[side .. "UpperArm"] = Vector3.new(0.65 * arms, 0.95 * height, 0.7 * arms)
-		sizes[side .. "LowerArm"] = Vector3.new(0.57 * arms, 0.85 * height, 0.6 * arms)
-		sizes[side .. "Hand"] = Vector3.new(0.65 * arms, 0.5, 0.7 * arms)
-		sizes[side .. "UpperLeg"] = Vector3.new(0.7 * level.Legs, height, 0.8 * level.Legs)
-		sizes[side .. "LowerLeg"] = Vector3.new(0.6 * level.Legs, height, 0.65 * level.Legs)
-		sizes[side .. "Foot"] = Vector3.new(0.75 * level.Legs, 0.45, 1.15 * level.Legs)
-	end
-	for name, size in pairs(sizes) do model[name].Size = size end
-	local lower, upper = sizes.LowerTorso, sizes.UpperTorso
-	joint(model, "Root", "HumanoidRootPart", "LowerTorso", Vector3.zero, Vector3.zero)
-	joint(model, "Waist", "LowerTorso", "UpperTorso", Vector3.new(0, lower.Y/2, 0), Vector3.new(0, -upper.Y/2, 0))
-	joint(model, "Neck", "UpperTorso", "Head", Vector3.new(0, upper.Y/2, 0), Vector3.new(0, -0.6, 0))
-	for _, side in ipairs({ "Left", "Right" }) do
-		local sign = side == "Left" and -1 or 1
-		local arm, forearm = sizes[side .. "UpperArm"], sizes[side .. "LowerArm"]
-		local leg, shin = sizes[side .. "UpperLeg"], sizes[side .. "LowerLeg"]
-		joint(model, side .. "Shoulder", "UpperTorso", side .. "UpperArm", Vector3.new(sign*(upper.X+arm.X)/2, upper.Y*0.35, 0), Vector3.new(0, arm.Y/2, 0))
-		joint(model, side .. "Elbow", side .. "UpperArm", side .. "LowerArm", Vector3.new(0, -arm.Y/2, 0), Vector3.new(0, forearm.Y/2, 0))
-		joint(model, side .. "Wrist", side .. "LowerArm", side .. "Hand", Vector3.new(0, -forearm.Y/2, 0), Vector3.new(0, 0.25, 0))
-		joint(model, side .. "Hip", "LowerTorso", side .. "UpperLeg", Vector3.new(sign*lower.X*0.28, -lower.Y/2, 0), Vector3.new(0, leg.Y/2, 0))
-		joint(model, side .. "Knee", side .. "UpperLeg", side .. "LowerLeg", Vector3.new(0, -leg.Y/2, 0), Vector3.new(0, shin.Y/2, 0))
-		joint(model, side .. "Ankle", side .. "LowerLeg", side .. "Foot", Vector3.new(0, -shin.Y/2, 0), Vector3.new(0, 0.225, 0.15))
-	end
-	model.Humanoid.HipHeight = lower.Y/2 + 2*height + 0.45 - sizes.HumanoidRootPart.Y/2
-	model:SetAttribute("Fisico", level.Name)
+function Rig.Gloves(model)
+ local old=model:FindFirstChild("BoxingGloves")
+ if old then old:Destroy() end
+ local folder=Instance.new("Folder")
+ folder.Name,folder.Parent="BoxingGloves",model
+ for _,side in ipairs({"Left","Right"}) do
+  local hand=model:FindFirstChild(side.."Hand")
+  if hand then
+   local grip=hand:FindFirstChild(side.."GripAttachment")
+   if not grip then
+    grip=Instance.new("Attachment")
+    grip.Name,grip.Parent=side.."GripAttachment",hand
+   end
+   local scale=math.clamp(hand.Size.X/0.6,0.85,Catalog.GloveMaximumScale)
+   local glove=Instance.new("Part")
+   glove.Name,glove.Shape=side.."Glove",Enum.PartType.Ball
+   glove.Size=Vector3.new(table.unpack(Catalog.GloveSize))*scale
+   glove.Color,glove.Material=Color3.fromRGB(table.unpack(Catalog.GloveColor)),Enum.Material.SmoothPlastic
+   glove.CanCollide,glove.CanTouch,glove.CanQuery,glove.Massless=false,false,false,true
+   local weld=Instance.new("Weld")
+   weld.Name,weld.Part0,weld.Part1="HandAttachment",hand,glove
+   weld.C0=grip.CFrame*CFrame.new(table.unpack(Catalog.GloveOffset))
+   glove.CFrame=hand.CFrame*weld.C0
+   weld.Parent,glove.Parent=glove,folder
+  end
+ end
 end
 
-local function ornament(model, name, size, offset, color)
-	local part = Instance.new("Part")
-	part.Name, part.Size, part.Color = name, size, color
-	part.CanCollide, part.CanTouch, part.CanQuery, part.Massless = false, false, false, true
-	part.Material = Enum.Material.SmoothPlastic
-	local weld = Instance.new("Weld")
-	weld.Part0, weld.Part1, weld.C0 = model.Head, part, CFrame.new(offset)
-	weld.Parent, part.Parent = part, model.Cosmetics
-	return part
+function Rig.Scale(model,data)
+ local level,strength=Physique.Resolve(data)
+ local hum=model:FindFirstChildOfClass("Humanoid")
+ if not hum then return end
+ for name,value in pairs({BodyWidthScale=level.Width+strength,BodyDepthScale=level.Depth,BodyHeightScale=level.Height,HeadScale=1}) do
+  local number=hum:FindFirstChild(name)
+  if number then number.Value=value end
+ end
+ model:SetAttribute("Fisico",level.Name)
+ Rig.Gloves(model)
 end
 
-function Rig.Dress(model, choice)
-	local skin = Color3.fromRGB(table.unpack(Appearance.Piel[choice.Piel].Color))
-	local shorts = Color3.fromRGB(table.unpack(Appearance.Shorts[choice.Shorts].Color))
-	for _, part in ipairs(model:GetChildren()) do
-		if part:IsA("BasePart") then
-			part.Color = skin
-			if part.Name == "LowerTorso" or part.Name:find("UpperLeg") then part.Color = shorts end
-			if part.Name:find("Hand") then part.Color = Theme.Boxer.Wraps end
-			if part.Name:find("Foot") then part.Color = Theme.Boxer.Shoes end
-		end
-	end
-	local old = model:FindFirstChild("Cosmetics")
-	if old then old:Destroy() end
-	local folder = Instance.new("Folder")
-	folder.Name, folder.Parent = "Cosmetics", model
-	if choice.Cabello == 2 then
-		ornament(model, "Cabello", Vector3.new(1.45, 0.3, 1.22), Vector3.new(0, 0.58, 0), Theme.Boxer.Hair)
-	elseif choice.Cabello == 3 then
-		ornament(model, "Cresta", Vector3.new(0.38, 0.55, 1.15), Vector3.new(0, 0.7, 0), Theme.Boxer.Hair)
-	end
-	for _, sign in ipairs({ -1, 1 }) do
-		ornament(model, "Ojo", Vector3.new(0.13, 0.17, 0.06), Vector3.new(sign*0.3, 0.1, -0.62), Theme.Boxer.Ink)
-		local brow = ornament(model, "Ceja", Vector3.new(0.27, 0.06, 0.06), Vector3.new(sign*0.3, 0.3, -0.62), Theme.Boxer.Hair)
-		brow.Weld.C0 = brow.Weld.C0 * CFrame.Angles(0, 0, choice.Cara == 3 and sign*0.25 or 0)
-	end
-	ornament(model, "Boca", Vector3.new(0.42, choice.Cara == 1 and 0.15 or 0.05, 0.06), Vector3.new(0, -0.28, -0.62), choice.Cara == 1 and Theme.Boxer.Wraps or Theme.Boxer.Ink)
+function Rig.Dress(model,choice,data)
+ if model:GetAttribute("AppearanceKey")==key(choice) then return end
+ local snapshot=table.clone(data or {})
+ snapshot.Appearance=choice
+ local description=Rig.Description(snapshot)
+ local ok,err=pcall(function() model.Humanoid:ApplyDescriptionResetAsync(description) end)
+ description:Destroy()
+ if not ok then warn("BoxerRig: apariencia no aplicada",err) return end
+ model:SetAttribute("AppearanceKey",key(choice))
+ Rig.Scale(model,snapshot)
 end
 
 function Rig.Create(data)
-	local model = Instance.new("Model")
-	model.Name = "Boxeador"
-	local names = { "HumanoidRootPart", "LowerTorso", "UpperTorso", "Head" }
-	for _, side in ipairs({ "Left", "Right" }) do
-		for _, limb in ipairs({ "UpperArm", "LowerArm", "Hand", "UpperLeg", "LowerLeg", "Foot" }) do
-			table.insert(names, side .. limb)
-		end
-	end
-	for _, name in ipairs(names) do
-		local part = Instance.new("Part")
-		part.Name, part.Material = name, Enum.Material.SmoothPlastic
-		part.TopSurface, part.BottomSurface = Enum.SurfaceType.Smooth, Enum.SurfaceType.Smooth
-		part.CanCollide = name == "UpperTorso" or name == "LowerTorso"
-		part.Massless = name ~= "HumanoidRootPart"
-		part.Parent = model
-	end
-	model.HumanoidRootPart.Transparency, model.HumanoidRootPart.RootPriority = 1, 127
-	local humanoid = Instance.new("Humanoid")
-	humanoid.RigType, humanoid.AutomaticScalingEnabled = Enum.HumanoidRigType.R15, false
-	humanoid.WalkSpeed, humanoid.Parent = Settings.WalkSpeed, model
-	model.PrimaryPart = model.HumanoidRootPart
-	Rig.Scale(model, data)
-	Rig.Dress(model, data.Appearance or Appearance.Default)
-	-- Assemble the rest pose before exposing the character to physics.
-	for _, name in ipairs(names) do
-		for _, motor in ipairs(model[name]:GetChildren()) do
-			if motor:IsA("Motor6D") then motor.Part1.CFrame = motor.Part0.CFrame * motor.C0 * motor.C1:Inverse() end
-		end
-	end
-	model:SetAttribute("Boxeador", true)
-	return model
+ local description=Rig.Description(data)
+ local ok,model=pcall(function() return Players:CreateHumanoidModelFromDescriptionAsync(description,Enum.HumanoidRigType.R15) end)
+ description:Destroy()
+ if not ok then
+  warn("BoxerRig: catálogo no disponible; usando respaldo",model)
+  description=Rig.Description(data,true)
+  ok,model=pcall(function() return Players:CreateHumanoidModelFromDescriptionAsync(description,Enum.HumanoidRigType.R15) end)
+  description:Destroy()
+ end
+ if not ok then error("No se pudo crear el boxeador: "..tostring(model)) end
+ model.Name,model.PrimaryPart="Boxeador",model.HumanoidRootPart
+ model.Humanoid.WalkSpeed=Settings.WalkSpeed
+ model.Humanoid.DisplayDistanceType=Enum.HumanoidDisplayDistanceType.None
+ -- Suppress Roblox's default idle/run controller: it would blend over boxing.
+ local animate=Instance.new("LocalScript")
+ animate.Name,animate.Disabled,animate.Parent="Animate",true,model
+ -- Local Animators avoid double playback/replication; all clients read server-approved states.
+ local animator=model.Humanoid:FindFirstChildOfClass("Animator")
+ if animator then animator:Destroy() end
+ model:SetAttribute("AppearanceKey",key(data.Appearance or Appearance.Default))
+ model:SetAttribute("Boxeador",true)
+ Rig.Scale(model,data)
+ return model
 end
-
+function Rig.AssemblePreview(model)
+ local placed={[model.HumanoidRootPart]=true}
+ model.HumanoidRootPart.CFrame=CFrame.identity
+ for _=1,18 do
+  for _,j in ipairs(model:GetDescendants()) do
+   if j:IsA("JointInstance") or j:IsA("AnimationConstraint") then
+    local a,b=j.Part0,j.Part1
+    if a and b then
+     if placed[a] and not placed[b] then b.CFrame=a.CFrame*j.C0*j.C1:Inverse() placed[b]=true
+     elseif placed[b] and not placed[a] then a.CFrame=b.CFrame*j.C1*j.C0:Inverse() placed[a]=true end
+    end
+   end
+  end
+ end
+end
 return Rig

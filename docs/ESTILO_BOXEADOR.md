@@ -1,5 +1,7 @@
 # Boxeador: comparación del estilo definitivo
 
+> Decisión posterior del dueño (2026-11-28): V2 aprobado como PROVISIONAL para Parte B; no seguir buscando artículos. Modelo y acabado definitivos pasan a Fase 7. Esta comparación conserva el estado histórico de Parte A.
+
 Revisión del 2026-11-28, solo Parte A. A–D quedan descartadas. **Ninguna variante está aprobada ni terminada: falta resolver los tenis y acercar los detalles de ropa a la referencia. Parte B no iniciada.**
 
 [Abrir comparación visual grande: referencia, frente y lado](referencias/estilo-final/comparacion.html).

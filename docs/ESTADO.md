@@ -1,19 +1,19 @@
 # Estado actual del proyecto
 
 ## Fase actual
-Fase 2 abierta. Estilo definitivo de la referencia Roblox + anime; A–D descartadas. Parte A: dos variantes nuevas, frente/lado y Flaco/Bestia en docs/ESTILO_BOXEADOR.md. Calzado y detalles de ropa pendientes; no hay aprobación visual. Parte B no iniciada.
+Fase 2: Parte B implementada con personaje PROVISIONAL V2 y KeyframeSequence. Validación rápida hecha el 2026-11-28; falta aprobación manual del dueño. Modelo definitivo y acabado visual pasan a Fase 7. No iniciar Fase 3 aún.
 
 ## Checklist de fases
 Cada fase tiene su criterio de "terminado". No se pasa a la siguiente sin prueba manual de la persona dueña anotada aquí.
 
 - [x] **Fase 0: idea y diseño.** Criterio: `DISENO_JUEGO.md` completo. Hecho el 2026-11-26.
 - [x] **Fase 1: datos y stats.** Criterio: un jugador entra, ve sus 4 stats y su rango, y al salir y volver siguen igual. Cerrada el 2026-11-26: persistencia validada en Studio y dueño confirma que el panel se ve bien y autoriza cierre.
-- [ ] **Fase 2: boxeador propio y animaciones.** Criterio: todos entran con el boxeador del juego (no su avatar), con cuerpo clásico Roblox suavizado, robusto y chaparrito, cara caricaturesca, pelo anime, camiseta sin mangas, shorts, guantes grandes y tenis altos según la referencia definitiva; la primera vez eligen tono de piel, cabello, cara y color de shorts y se guarda; el cuerpo crece visiblemente con los stats (niveles de físico); hay animaciones KeyframeSequence (no movidas con código) de guardia, jab, gancho, uppercut, correr y cansado, con peso y giro de cadera; la persona dueña aprueba cómo se ven.
+- [ ] **Fase 2: boxeador provisional funcional y animaciones.** Criterio: todos entran con el personaje provisional V2, apariencia elegida guardada, guantes unidos a las manos y diferencia clara Flaco/Bestia; guardia, jab, gancho, uppercut, correr y cansado son KeyframeSequence funcionales que el dueño confirma que se ven bien. No exige el modelo definitivo ni el acabado de arte.
 - [ ] **Fase 3: gym jugable.** Criterio: caminadora con W y cinta que cambia de velocidad (te caes si te quedas atrás); saco con clic y golpes animados que mueven el saco; pesas con clic por repetición y ritmo; pera con golpes izquierda/derecha; barra de energía que se gasta y se recupera; stats suben según lo que haces, con límites del servidor y sin pasar el tope del rango. Se reutiliza el gym, la ocupación y el control de premios hechos antes.
 - [ ] **Fase 4: combate contra NPC.** Criterio: en el ring puedes pelear 3 rounds contra un NPC con jab, gancho, uppercut, bloquear y esquivar, usando los mismos golpes del saco; las barras de vida y stamina funcionan y la pelea termina con un ganador.
 - [ ] **Fase 5: rangos y rivales.** Criterio: ganar peleas da puntos de rango; subes de Novato a Amateur y a Semi-pro; cada rango tiene su rival NPC, su tope de stats y equipo de gym mejor.
 - [ ] **Fase 6: PvP 1 contra 1.** Criterio: dos jugadores reales pueden retarse y pelear en el ring con las mismas reglas, y el ganador recibe puntos de rango si son de rangos parecidos.
-- [ ] **Fase 7: interfaz y arte (ForgeGUI).** Criterio: HUD, barras, pantallas de rango y creador de personaje con el estilo final; animaciones definitivas subidas por el dueño; texturas de físico por nivel; funcionando en PC y celular.
+- [ ] **Fase 7: interfaz y arte (ForgeGUI).** Criterio: modelo definitivo del boxeador mandado a hacer o generado en 3D, rig compatible y ajuste de ropa/calzado/guantes según referencia; HUD, creador y pantallas con arte final; texturas de físico y animaciones definitivas subidas por el dueño; funcionando en PC y celular.
 - [ ] **Fase 8: prepublicación.** Criterio: los NPC ya no dan puntos de rango (solo el ring de práctica, sin puntos), el rango se sube solo con PvP; validaciones anti-trampas en servidor; prueba con dos clientes reales y en celular; lista para publicar.
 
 Después de publicar (fuera de la v1): torneos, más rangos, cosméticos, monedas y tienda.
@@ -22,16 +22,17 @@ Después de publicar (fuera de la v1): torneos, más rangos, cosméticos, moneda
 - [ ] Desactivar API Services, comprobar «Tu progreso no se está guardando», rechazo de premios y ausencia de sobrescritura; reactivar y recuperar progreso. Trasladada desde Fase 1 por instrucción del dueño el 2026-11-26.
 
 ## Último en trabajar
-[codex] · 2026-11-28 03:16. Dos propuestas nuevas con capturas reales y catálogo de 4 caras, 6 peinados y 4 colores, autores y respaldos. Revisiones Play 81 s y 54 s. Ajuste de tenis fallido; fase abierta.
+[codex] · 2026-11-28 03:32. Parte B provisional implementada, Rojo sincronizado. Dos revisiones Studio de 35 s y 61 s; seis tracks y físico/guantes comprobados. Guías PRUEBA_FASE_2.md y SUBIR_ANIMACIONES.md actualizadas.
 
-## Rehacer Fase 2: estilo definitivo Roblox + anime
-- [x] A–D descartadas por el dueño; comparación anterior conservada como histórica.
-- [x] Dos cuerpos de catálogo con HumanoidDescription, capturas de frente/lado junto a la referencia: docs/ESTILO_BOXEADOR.md y su comparación HTML.
-- [x] Propuesta de cinco niveles con el mismo cuerpo; capturas de Flaco y Bestia. Cuatro caras, seis peinados, cuatro colores y autoría/respaldo documentados.
-- [ ] Resolver tenis deformados/ocultos, camiseta abultada, puños demasiado abiertos y acentos de la referencia. Las capturas no certifican compatibilidad final.
-- [ ] Dueño aprueba estilo y escalas. No avanzar a Parte B todavía.
-- [ ] Parte B: BoxerRig con HumanoidDescription, apariencia persistida compatible, seis KeyframeSequence y docs/SUBIR_ANIMACIONES.md.
-- [ ] Prueba manual y aprobación visual antes de cerrar Fase 2.
+## Fase 2 provisional: Parte B
+- [x] Dueño elige V2 provisional con picos; suspende búsqueda de cuerpos/caras/ropa. Decisión del 2026-11-28.
+- [x] BoxerRig con HumanoidDescription, catálogo fijo y opciones propuestas en Appearance. Registros existentes conservados; no se pide elegir otra vez.
+- [x] Guantes propios provisionales unidos a Left/RightGripAttachment y tamaño limitado; sin capas de catálogo para los guantes.
+- [x] Misma malla con cinco escalas; Bestia aproximadamente 52 % más ancho que Flaco en torso/brazos en la revisión. StudioDebug Physique permite prueba sin modificar datos.
+- [x] Seis KeyframeSequence con jerarquía R15, marcadores y reproducción Animator. Sin escrituras Transform por frame. Controlador Animate estándar desactivado.
+- [x] Guía de subida y rig de exportación generado en ServerStorage.BoxerAnimationExport. No hay assets publicados.
+- [ ] Prueba manual del dueño de aspecto funcional, movimiento y golpes; primera elección con jugador nuevo, dos clientes y toque real.
+- [ ] Subir seis animaciones y completar AnimationIds antes del juego publicado (arte/publicación, Fase 7). Studio funciona con IDs temporales.
 
 ## Avance de Fase 2: boxeador y animaciones
 Histórico de la primera implementación: las comprobaciones siguientes no satisfacen el criterio nuevo de mallas y KeyframeSequence.
@@ -75,9 +76,9 @@ Histórico de la primera implementación: las comprobaciones siguientes no satis
 - El ejecutable `rojo` en PATH es un shim de Rokit sin manifiesto; el sourcemap pasó usando el binario instalado de Rojo 7.7.1 directamente.
 
 ## Siguiente paso
-Revisar docs/ESTILO_BOXEADOR.md y la comparación visual. Resolver el calzado y acordar ajustes de la variante preferida antes de Parte B. Studio quedó en Edit, sin modelos temporales y cámara restaurada; no se guardó/publicó el lugar. Scripts y minijuegos intactos. No iniciar Fase 3.
+Dueño recorre docs/PRUEBA_FASE_2.md y confirma si los golpes se ven bien. Fase 2 sigue abierta hasta esa prueba manual. Para publicar animaciones: docs/SUBIR_ANIMACIONES.md. Modelo/ropa/calzado definitivos en Fase 7; no seguir buscando artículos. Studio quedó en Edit, con material de exportación en ServerStorage, sin guardar/publicar el lugar. No iniciar Fase 3 aún.
 
 ## Preguntas pendientes
-- Preferencia entre las nuevas siluetas V1/V2 y escalas; ¿qué ajustes visuales pide el dueño? No hay aprobación de ninguna. Tenis y detalles de ropa siguen pendientes.
+- Aprobación manual de los movimientos del personaje provisional; V2 ya fue elegido. Arte final no bloquea esta revisión funcional.
 - Jugadores por servidor (provisional 12).
 - Nombre definitivo del juego.

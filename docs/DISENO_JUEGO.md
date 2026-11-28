@@ -104,6 +104,7 @@ El gym no son minijuegos de "picarle al verde": tu personaje entrena de verdad y
 - **PvP:** un jugador reta a otro en el ring (o entra a una fila del ring) y pelean 1 contra 1. Los puntos de rango solo cuentan si los dos son de rangos parecidos, para que nadie suba molestando a novatos.
 
 ## 9b. Personaje propio que evoluciona
+- **Decisión 2026-11-28:** primero funcional. Fase 2 usa V2 con picos como personaje PROVISIONAL; guantes sujetos a manos, físico visible y KeyframeSequence. El modelo definitivo (encargado o generado en 3D), ropa/calzado y acabado pasan a Fase 7. No buscar más artículos en esta fase.
 - No se usan los avatares de Roblox. Todos juegan con un **boxeador del juego** (shorts, vendas o guantes, tenis).
 - Al entrar por primera vez, el jugador elige lo básico para no verse igual a todos: tono de piel, cabello, cara y color de shorts.
 - **El cuerpo crece con lo que entrenas:** más ancho de hombros y brazos con Fuerza, más definido con el total de stats. Se hace por niveles de físico (por ejemplo flaco → atlético → marcado → musculoso → bestia) ligados a los stats, para que el cambio se note.
@@ -120,7 +121,7 @@ El gym no son minijuegos de "picarle al verde": tu personaje entrena de verdad y
 - **Estilo objetivo (2026-11-28): Roblox con toque anime.** Referencia: `docs/referencias/estilo-objetivo.png`. Cuerpo de Roblox clásico pero suavizado (orillas redondeadas, proporciones chaparritas y robustas, manos y guantes grandes), cara de caricatura expresiva, peinado anime en picos, camiseta sin mangas, shorts de box, guantes de verdad y tenis altos de bota. Colores vivos. No es realista ni de malla con anatomía detallada.
 - Gráficos, interfaz e imágenes con **ForgeGUI**.
 - Regla aprobada: si ForgeGUI no da modelos 3D o se acaban los créditos, los modelos del gym (saco, caminadora, pesas, ring) se hacen con bloques o se toman gratis del Creator Store (sin scripts), y ForgeGUI se usa para interfaz, íconos y texturas.
-- La interfaz va hasta el final (Fase 6): primero que todo funcione con una interfaz simple, luego se pone bonito. Todo el estilo sale de un solo módulo de tema, para cambiar el look en un solo lugar.
+- La interfaz va hasta el final (Fase 7): primero que todo funcione con una interfaz simple, luego se pone bonito. Todo el estilo sale de un solo módulo de tema, para cambiar el look en un solo lugar.
 
 ## 11. Alcance de la v1
 Entra:

@@ -31,23 +31,45 @@ function Boxer.Start(service, spawnCFrame)
 		if sessions[player] then return end
 		local state = { nextPunch = 0, connections = {} }
 		sessions[player] = state
+		local refresh
 		local function spawn()
-			if player.Parent ~= Players then return end
+			if player.Parent ~= Players or state.spawning then return end
+			state.spawning = true
 			local old = player.Character
-			local character = Rig.Create(dataService.GetSnapshot(player) or {})
+			local ok, character = pcall(Rig.Create, dataService.GetSnapshot(player) or {})
+			state.spawning = false
+			if not ok then
+				warn("BoxerService: creación fallida", character)
+				task.delay(Config.RespawnSeconds, spawn)
+				return
+			end
+			if player.Parent ~= Players then character:Destroy() return end
 			character.Name = player.Name
 			character:PivotTo(spawnCFrame)
 			character.Parent = workspace
 			player.Character = character
 			if old then old:Destroy() end
 			character.Humanoid.Died:Once(function() task.delay(Config.RespawnSeconds, spawn) end)
+			refresh()
 		end
-		local function refresh()
-			local character, snapshot = player.Character, dataService.GetSnapshot(player)
-			if character and character:GetAttribute("Boxeador") and snapshot then
-				Rig.Scale(character, snapshot)
-				Rig.Dress(character, snapshot.Appearance or require(ReplicatedStorage.Config.Appearance).Default)
-			end
+		refresh = function()
+			state.dirty = true
+			if state.refreshing then return end
+			state.refreshing = true
+			task.defer(function()
+				while state.dirty and sessions[player] == state do
+					state.dirty = false
+					local character, snapshot = player.Character, dataService.GetSnapshot(player)
+					if character and character:GetAttribute("Boxeador") and snapshot then
+						local ok, err = pcall(function()
+							Rig.Dress(character, snapshot.Appearance or require(ReplicatedStorage.Config.Appearance).Default, snapshot)
+							Rig.Scale(character, snapshot)
+						end)
+						if not ok then warn("BoxerService: actualización fallida", err) end
+					end
+				end
+				state.refreshing = false
+			end)
 		end
 		for _, name in ipairs(Stats.Names) do
 			table.insert(state.connections, player:GetAttributeChangedSignal(name):Connect(refresh))
@@ -55,7 +77,7 @@ function Boxer.Start(service, spawnCFrame)
 		for _, name in ipairs({ "EstadoDatos", "AparienciaElegida" }) do
 			table.insert(state.connections, player:GetAttributeChangedSignal(name):Connect(refresh))
 		end
-		spawn()
+		task.spawn(spawn)
 	end
 	Players.PlayerAdded:Connect(track)
 	Players.PlayerRemoving:Connect(function(player)

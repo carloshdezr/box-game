@@ -10,6 +10,12 @@ local controllers = {}
 
 local function track(other)
 	local function added(character)
+		local function disableDefault(item)
+			if item.Name == "Animate" and item:IsA("LocalScript") then item.Disabled = true end
+		end
+		for _, item in ipairs(character:GetChildren()) do disableDefault(item) end
+		local addedConnection = character.ChildAdded:Connect(disableDefault)
+		character.Destroying:Once(function() addedConnection:Disconnect() end)
 		task.spawn(function()
 			local humanoid = character:WaitForChild("Humanoid", 10)
 			if not humanoid or not character.Parent or other.Character ~= character then return end
@@ -17,12 +23,17 @@ local function track(other)
 			for _, name in ipairs({ "LeftHand", "RightHand", "LeftFoot", "RightFoot", "Head" }) do
 				if not character:WaitForChild(name, 10) then return end
 			end
-			controllers[other] = { character = character, humanoid = humanoid, apply = Animations.Bind(character) }
+			local apply, destroy = Animations.Bind(character)
+			if other.Character ~= character then destroy() return end
+			controllers[other] = { character = character, humanoid = humanoid, apply = apply, destroy = destroy }
 			if other == player then workspace.CurrentCamera.CameraSubject = humanoid end
 		end)
 	end
 	other.CharacterAdded:Connect(added)
-	other.CharacterRemoving:Connect(function() controllers[other] = nil end)
+	other.CharacterRemoving:Connect(function()
+		if controllers[other] then controllers[other].destroy() end
+		controllers[other] = nil
+	end)
 	if other.Character then added(other.Character) end
 end
 Players.PlayerAdded:Connect(track)

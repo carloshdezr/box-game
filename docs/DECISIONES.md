@@ -1,5 +1,13 @@
 # Decisiones
 
+## 2026-11-28 · [codex] · V2 provisional funcional; modelo final en Fase 7
+- Decisión del dueño: usar V2 con picos como provisional y avanzar Parte B; no buscar más cuerpos, caras ni ropa. Modelo definitivo mandado a hacer o generado en 3D y acabado final pasan a Fase 7. El criterio de Fase 2 es funcionalidad y animaciones que el dueño vea bien.
+- Guantes: formas redondeadas propias, unidas mediante Weld al GripAttachment de cada mano y con escala limitada. Se evita la deformación de los guantes por capas y se garantiza que siguen los golpes. Ropa actual provisional; tenis problemáticos omitidos, pendientes de arte.
+- Físico: mismo cuerpo Short Round Blocky y escala del motor; umbrales 1/25/75/150/300 conservados. Anchura Flaco 0.82 a Bestia 1.20 más bonus de Fuerza hasta 0.08; cabeza fija. Se elimina escala manual de articulaciones.
+- Animación: seis KeyframeSequence con poses/tiempos y anticipación, impacto y recuperación; Animator interpola. Cada cliente anima los personajes visibles con Animator local a partir de estados de golpe aprobados por servidor, evitando doble replicación. No son animaciones procedurales por frame. IDs temporales en Studio, permanentes pendientes en Config/Boxer para publicación. Dos clientes aún requieren prueba manual.
+- Apariencia: mismos índices persistidos, sin borrar ni reabrir elección. Los dibujos viejos se sustituyen por las opciones propuestas: cabello 3 conserva picos; shorts 1 rojo y 2 azul; antiguo verde (3) se representa negro. Las caras y pelo rapado pasan a sus equivalentes provisionales del catálogo según índice. No se cambia el registro guardado. Si Create falla, se intenta descripción de respaldo Roblox; nunca se sobrescribe la selección persistida por fallo visual.
+- Exportación: herramienta reproducible tools/prepare-animation-editor.lua genera rig y seis secuencias con AnimSaves en ServerStorage del mismo lugar; no publica ni guarda el lugar.
+
 ## 2026-11-28 · [codex] · Comparación del estilo definitivo, sin Parte B
 - Qué: se descartan A–D y se comparan Smooth Blocky 1.0 y Short Round Blocky con HumanoidDescription. Propuesta de físico con una sola malla y escala creciente, no cuerpos distintos. Catálogo y capturas en ESTILO_BOXEADOR.md. Ninguna propuesta se considera aprobada.
 - Por qué: acercar la silueta a la referencia del dueño conservando identidad al crecer. Cabeza clásica explícita 746767604: Head=0 produjo cabeza dinámica sin la cara clásica deseada.

@@ -42,11 +42,21 @@ local camera = Instance.new("Camera")
 camera.CFrame, camera.Parent = CFrame.lookAt(Vector3.new(4, 2, -9), Vector3.new(0, 0.4, 0)), viewport
 viewport.CurrentCamera = camera
 local preview
+local previewRevision = 0
 local function updatePreview()
-	if preview then preview:Destroy() end
-	preview = Rig.Create({ Appearance = choice })
-	preview.HumanoidRootPart.Anchored = true
-	preview.Parent = world
+	previewRevision = previewRevision + 1
+	local revision, selected = previewRevision, table.clone(choice)
+	if player:GetAttribute("AparienciaElegida") then return end
+	task.spawn(function()
+		local ok, model = pcall(Rig.Create, { Appearance = selected })
+		if not ok then warn("Vista previa no disponible", model) return end
+		if revision ~= previewRevision or player:GetAttribute("AparienciaElegida") then model:Destroy() return end
+		if preview then preview:Destroy() end
+		preview = model
+		Rig.AssemblePreview(preview)
+		preview.HumanoidRootPart.Anchored = true
+		preview.Parent = world
+	end)
 end
 updatePreview()
 for index, field in ipairs(Config.Fields) do

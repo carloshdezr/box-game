@@ -4,12 +4,12 @@
 - cluster-only mode — file stats not available
 
 ## Summary
-- 112 nodes · 157 edges · 14 communities (8 shown, 6 thin omitted)
-- Extraction: 90% EXTRACTED · 10% INFERRED · 0% AMBIGUOUS · INFERRED: 16 edges (avg confidence: 0.85)
+- 122 nodes · 170 edges · 17 communities (9 shown, 8 thin omitted)
+- Extraction: 89% EXTRACTED · 11% INFERRED · 0% AMBIGUOUS · INFERRED: 19 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `22651cff`
+- Built from commit: `f6eacd46`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -23,6 +23,7 @@
 - Community 8
 - Community 12
 - Community 13
+- Community 14
 
 ## God Nodes (most connected - your core abstractions)
 1. `load()` - 8 edges
@@ -31,10 +32,10 @@
 4. `Training.Start()` - 7 edges
 5. `finish()` - 5 edges
 6. `Training.Begin()` - 5 edges
-7. `publish()` - 4 edges
-8. `Service.SetAppearance()` - 4 edges
-9. `Service.Start()` - 4 edges
-10. `update()` - 4 edges
+7. `Rig.Scale()` - 5 edges
+8. `publish()` - 4 edges
+9. `Service.SetAppearance()` - 4 edges
+10. `Service.Start()` - 4 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `setup()` --calls--> `load()`  [INFERRED]
@@ -51,7 +52,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (14 total, 6 thin omitted)
+## Communities (17 total, 8 thin omitted)
 
 ### Community 0 - "Community 0"
 Cohesion: 0.32
@@ -73,35 +74,39 @@ Nodes (8): allCapped(), near(), notify(), release(), Training.Begin(), Training.
 Cohesion: 0.25
 Nodes (4): Appearance.Validate(), Schema.New(), Schema.Validate(), validNumber()
 
-### Community 8 - "Community 8"
-Cohesion: 0.12
-Nodes (9): joint(), ornament(), Rig.Create(), Rig.Dress(), Rig.Scale(), Physique.Resolve(), Boxer.Start(), updatePreview() (+1 more)
+### Community 5 - "Community 5"
+Cohesion: 0.22
+Nodes (3): Rig.AssemblePreview(), updatePreview(), task.spawn()
 
 ### Community 12 - "Community 12"
-Cohesion: 0.60
-Nodes (3): angle(), Animations.Bind(), Animations.Sample()
+Cohesion: 0.36
+Nodes (4): Animations.Bind(), asset(), Sequences.Build(), Sequences.Export()
 
 ### Community 13 - "Community 13"
+Cohesion: 0.40
+Nodes (7): key(), Rig.Create(), Rig.Description(), Rig.Dress(), Rig.Gloves(), Rig.Scale(), Physique.Resolve()
+
+### Community 14 - "Community 14"
 Cohesion: 0.67
 Nodes (3): copy(), setup(), signal()
 
 ## Knowledge Gaps
-- **6 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **8 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `task.wait()` connect `Community 0` to `Community 3`, `Community 5`?**
-  _High betweenness centrality (0.167) - this node is a cross-community bridge._
+- **Why does `task.spawn()` connect `Community 5` to `Community 0`, `Community 3`?**
+  _High betweenness centrality (0.135) - this node is a cross-community bridge._
 - **Are the 3 inferred relationships involving `load()` (e.g. with `Schema.New()` and `task.wait()`) actually correct?**
   _`load()` has 3 INFERRED edges - model-reasoned connections that need verification._
-- **Should `Community 8` be split into smaller, more focused modules?**
-  _Cohesion score 0.11956521739130435 - nodes in this community are weakly interconnected._
-- **Why does `Training.Start()` connect `Community 3` to `Community 0`, `Community 5`?**
-  _High betweenness centrality (0.120) - this node is a cross-community bridge._
+- **Why does `updatePreview()` connect `Community 5` to `Community 8`?**
+  _High betweenness centrality (0.125) - this node is a cross-community bridge._
 - **Are the 2 inferred relationships involving `save()` (e.g. with `Schema.Validate()` and `task.wait()`) actually correct?**
   _`save()` has 2 INFERRED edges - model-reasoned connections that need verification._
-- **Why does `load()` connect `Community 0` to `Community 4`, `Community 13`?**
-  _High betweenness centrality (0.091) - this node is a cross-community bridge._
+- **Why does `Training.Start()` connect `Community 3` to `Community 0`, `Community 5`?**
+  _High betweenness centrality (0.110) - this node is a cross-community bridge._
 - **Are the 6 inferred relationships involving `task.wait()` (e.g. with `finish()` and `load()`) actually correct?**
   _`task.wait()` has 6 INFERRED edges - model-reasoned connections that need verification._
+- **Are the 2 inferred relationships involving `Training.Start()` (e.g. with `task.spawn()` and `task.wait()`) actually correct?**
+  _`Training.Start()` has 2 INFERRED edges - model-reasoned connections that need verification._

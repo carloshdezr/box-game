@@ -30,6 +30,19 @@ function StudioDebug.Start(playerData, training, boxer)
 			if name ~= nil and name ~= "Cansado" and name ~= "Correr" then return false end
 			player.Character:SetAttribute("PoseDebug", name)
 			return true
+		elseif action == "Physique" and player.Character then
+			-- Visual-only override. Never raises the player's rank or saved stats.
+			local config = require(game.ReplicatedStorage.Config.Physique)
+			local data = playerData.GetSnapshot(player)
+			if not data then return false end
+			if name ~= nil then
+				local chosen
+				for _, level in ipairs(config.Levels) do if level.Name == name then chosen = level end end
+				if not chosen then return false end
+				for _, stat in ipairs(config.Stats) do data[stat] = chosen.Minimum end
+			end
+			require(game.ReplicatedStorage.BoxerRig).Scale(player.Character, data)
+			return true
 		elseif action == "TrainingStart" and training then
 			return training.Begin(player, name)
 		elseif action == "TrainingFinish" and training then
