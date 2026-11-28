@@ -1,5 +1,12 @@
 # Bitácora
 
+## 2026-11-28 02:45 · [claude] · Diseño
+- Qué hice: la persona dueña probó la Fase 2 y el boxeador le pareció genérico. Actualicé diseño, criterio y decisiones: cuerpo de malla redondeado con artículos del catálogo (HumanoidDescription) y animaciones KeyframeSequence en lugar de código.
+- Archivos tocados: `docs/DISENO_JUEGO.md`, `docs/ESTADO.md`, `docs/DECISIONES.md`, `docs/BITACORA.md`.
+- Cómo probarlo: leer sección 9b del diseño.
+- Qué quedó mal o pendiente: rehacer el rig y las animaciones de la Fase 2.
+- Siguiente paso recomendado: proponer 3 o 4 cuerpos del catálogo con capturas para que elija la persona dueña, y rehacer las animaciones.
+
 ## 2026-11-28 02:32 · [codex] · Fase 2
 - Qué hice: git pull origin main trajo el diseño 22651cf; leí protocolo, estado, últimas entradas, decisiones, diseño y grafo. Implementé R15 propio generado desde src (shorts, vendas, tenis, cara/cabello), creador con vista previa y elección única validada/persistida, crecimiento servidor por cinco niveles y Fuerza, módulo reutilizable de poses y golpes visuales con frecuencia/alternancia decididas por servidor. Umbrales de promedio 1/25/75/150/300 aprobados por el dueño. Minijuegos actuales intactos; energía y gym jugable quedan en Fase 3.
 - Archivos tocados: Config/{Appearance,Physique,Boxer,Theme}, ReplicatedStorage/{BoxerRig,BoxerAnimations}, Remotes/{ChooseAppearance,BoxerPunch}, Services/{BoxerService,PlayerDataSchema,PlayerDataService,StudioDebug}, Main, clientes {Appearance,Boxer}, tools/check-data.{cjs,lua}, docs/{ESTADO,DECISIONES,BITACORA,PRUEBA_FASE_2,PRUEBA_GYM_ANTERIOR}, graphify-out/{GRAPH_REPORT.md,graph.json,graph.html}.

@@ -107,15 +107,17 @@ El gym no son minijuegos de "picarle al verde": tu personaje entrena de verdad y
 - No se usan los avatares de Roblox. Todos juegan con un **boxeador del juego** (shorts, vendas o guantes, tenis).
 - Al entrar por primera vez, el jugador elige lo básico para no verse igual a todos: tono de piel, cabello, cara y color de shorts.
 - **El cuerpo crece con lo que entrenas:** más ancho de hombros y brazos con Fuerza, más definido con el total de stats. Se hace por niveles de físico (por ejemplo flaco → atlético → marcado → musculoso → bestia) ligados a los stats, para que el cambio se note.
-- Primero el crecimiento se hace con el tamaño del cuerpo (escala de brazos, torso y piernas). Lo "más definido" (marcas de músculo) necesita texturas o modelos por nivel y entra con el arte de ForgeGUI.
+- **Aspecto (cambio del 2026-11-28):** nada de cuerpo de bloques hecho con piezas. El boxeador se arma como un avatar moderno de Roblox, con cuerpo redondeado de malla (curvas, cabeza con cara expresiva), usando piezas del catálogo de Roblox (cuerpos, cabello, caras) cargadas con HumanoidDescription. Cualquier artículo del catálogo se puede usar así.
+- **Físico por niveles:** cada nivel usa un cuerpo del catálogo distinto (de delgado a musculoso) más ajustes de escala (ancho, proporción y tipo de cuerpo). Así lo "más definido" se ve de verdad, no solo más grande.
 - Los demás jugadores ven tu físico: es la forma de presumir cuánto has entrenado.
 
 ### Animaciones
 - Golpes (jab, gancho, uppercut), guardia, esquive, correr en la caminadora, levantar pesas, golpes rápidos en la pera, cansado y KO.
-- **Plan:** al inicio las animaciones se hacen con código (moviendo las articulaciones del personaje), así no hay que subir nada a Roblox y se puede probar ya. Después se reemplazan por animaciones hechas en el editor de animación, que **tiene que subir la persona dueña** con su cuenta (Roblox solo deja usar animaciones que sean del dueño del juego). Ese cambio va en la fase de arte.
+- **Plan (cambio del 2026-11-28):** las animaciones moviendo articulaciones con código se ven genéricas, así que se reemplazan ya por animaciones de verdad (KeyframeSequence) con varios cuadros, anticipación, giro de cadera y hombro, peso y regreso a la guardia. La IA las arma en Studio y se prueban ahí mismo. Para usarlas en el juego publicado **la persona dueña tiene que subirlas** con su cuenta (Roblox solo deja usar animaciones del dueño del juego); es un paso corto por animación.
+- Opción extra: grabarse a sí mismo haciendo los movimientos y usar la función de animación desde video del editor de animación de Studio, si está disponible, y que la IA la limpie.
 
 ## 10. Estilo visual
-- Caricatura: colores vivos, boxeador propio del juego (no avatares de Roblox), gym con ambiente divertido.
+- Estilo Roblox moderno: personajes redondeados como los avatares actuales (no de bloques), colores vivos, boxeador propio del juego, gym con ambiente divertido.
 - Gráficos, interfaz e imágenes con **ForgeGUI**.
 - Regla aprobada: si ForgeGUI no da modelos 3D o se acaban los créditos, los modelos del gym (saco, caminadora, pesas, ring) se hacen con bloques o se toman gratis del Creator Store (sin scripts), y ForgeGUI se usa para interfaz, íconos y texturas.
 - La interfaz va hasta el final (Fase 6): primero que todo funcione con una interfaz simple, luego se pone bonito. Todo el estilo sale de un solo módulo de tema, para cambiar el look en un solo lugar.

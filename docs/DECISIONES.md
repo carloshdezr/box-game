@@ -1,5 +1,11 @@
 # Decisiones
 
+## 2026-11-28 · [claude] · Personaje de malla y animaciones de verdad
+- **Qué:** el boxeador deja de armarse con piezas de bloque y pasa a ser un avatar moderno de Roblox (cuerpo de malla redondeado, cabeza con cara) armado con HumanoidDescription y artículos del catálogo. El físico por niveles cambia de cuerpo del catálogo además de la escala.
+- **Por qué:** la persona dueña probó la Fase 2 y lo vio genérico; quiere que parezca personaje de Roblox, con curvas, no cuadrado.
+- **Qué:** las animaciones con código se reemplazan por KeyframeSequence con más cuadros y peso; la persona dueña las sube para el juego publicado.
+- **Por qué:** pidió golpes con más animación; con código no se logra ese nivel. Roblox exige que las animaciones sean del dueño del juego.
+
 ## 2026-11-28 · [codex] · Implementación del boxeador (Fase 2)
 - **Qué:** cinco físicos por promedio de los cuatro stats: Flaco 1, Atlético 25, Marcado 75, Musculoso 150, Bestia 300. Umbrales aprobados explícitamente por el dueño en esta sesión. Physique.lua concentra umbrales y tamaños; Fuerza agrega hasta 0.2 a los multiplicadores de anchura del torso/brazos para reflejar su entrenamiento específico.
 - **Qué:** R15 propio de 15 piezas y HumanoidRootPart generado por BoxerRig, con Motor6D y escala manual de tamaños/anclajes en el servidor. Shorts por color de cintura/muslos, vendas, tenis, cabello y cara con piezas; tres opciones por campo en Appearance. No se consulta el avatar del usuario ni se requieren assets subidos. Arte provisional de bloques; texturas musculares y arte final siguen en Fase 7.
