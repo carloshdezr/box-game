@@ -1,5 +1,12 @@
 # Bitácora
 
+## 2026-11-28 02:20 · [claude] · Diseño
+- Qué hice: actualicé el diseño con lo que pidió la persona dueña tras probar el gym: entrenamiento físico (W en caminadora, golpes con animación y cansancio) y boxeador propio que crece con los stats. Reordené las fases: nueva Fase 2 (boxeador y animaciones), Fase 3 (gym jugable) y las demás recorridas hasta la Fase 8.
+- Archivos tocados: `docs/DISENO_JUEGO.md`, `docs/ESTADO.md`, `docs/DECISIONES.md`, `docs/BITACORA.md`.
+- Cómo probarlo: leer las secciones 6 y 9b del diseño.
+- Qué quedó mal o pendiente: el código del gym actual sigue con los minijuegos de barra hasta la Fase 3.
+- Siguiente paso recomendado: Fase 2, boxeador propio y animaciones con código.
+
 ## 2026-11-26 17:48 · [codex] · Fase 2
 - Qué hice: cerré Fase 1 con confirmación explícita del dueño y trasladé la prueba sin API Services a Fase 7. Implementé gym de bloques generado desde src, ocho puestos con prompts/ocupación, cuatro minijuegos con teclado y botón de pantalla, premios y tiempos validados por servidor, límites de rango y aviso de máximo. El dueño aprobó 20 s, 5 s de descanso y hasta +4 por stat. Identifiqué el asset 203785492 como `Sounds.Notification` del plugin RojoManagedPlugin; no lo modifiqué. Rojo sincronizó los 13 scripts; fuentes finales verificadas en el placeId autorizado.
 - Archivos tocados: `.gitignore`, `src/ReplicatedStorage/Config/{Training,Theme}.lua`, `src/ReplicatedStorage/Remotes/Training{State,Result,Cancel}.model.json`, `src/ServerScriptService/Main.server.lua`, `Services/{GymService,TrainingService,StudioDebug}.lua`, `src/StarterPlayer/StarterPlayerScripts/Training.client.lua`, `tools/{check-data.cjs,check-training.lua,find-plugin-asset.py}`, `docs/{ESTADO,DECISIONES,BITACORA,PRUEBA_FASE_1,PRUEBA_FASE_2}.md`, `graphify-out/{GRAPH_REPORT.md,graph.json,graph.html}`.

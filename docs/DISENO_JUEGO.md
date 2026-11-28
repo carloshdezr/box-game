@@ -3,7 +3,7 @@
 > Documento vivo. Lo que no esté claro se marca como **(pendiente)** en lugar de inventarlo. Los números reales viven en `src/ReplicatedStorage/Config/`; aquí solo se explica el porqué.
 
 ## 1. Idea en una frase
-Un juego de boxeo estilo caricatura donde entrenas en el gym con minijuegos para subir tus stats y luego peleas en el ring contra otros jugadores para subir de rango, de Novato a Campeón mundial.
+Un juego de boxeo estilo caricatura donde entrenas de verdad en el gym (corres, golpeas el saco, levantas pesas) mientras tu boxeador se pone más grande, para subir tus stats y luego peleas en el ring contra otros jugadores para subir de rango, de Novato a Campeón mundial.
 
 ## 2. Jugador y por qué vuelve
 - **Quién lo juega:** jugadores de Roblox a los que les gustan los simuladores de gym y los juegos de pelea. Tiene que funcionar en PC y en celular.
@@ -36,19 +36,28 @@ El tope por rango obliga a pelear: no se puede llegar a Campeón solo entrenando
 
 Todos empiezan en el mismo valor y se guardan entre sesiones.
 
-## 6. Gym y minijuegos
-Cada estación es un minijuego corto (unos 15 a 30 segundos por ronda). Hacerlo bien da más stats que hacerlo mal. Esto evita el autoclicker y hace que entrenar sea divertido.
+## 6. Gym jugable (entrenamiento físico)
+El gym no son minijuegos de "picarle al verde": tu personaje entrena de verdad y se ve. Lo que haces con las teclas es lo que hace tu boxeador.
 
-| Estación | Minijuego | Da |
+### Energía (cansancio)
+- Al entrenar aparece una barra de **Energía**. Cada golpe, cada repetición y correr rápido la gastan.
+- Con la energía baja, el personaje se mueve más lento, los golpes salen débiles y lo que ganas baja mucho. Si se vacía, tiene que descansar unos segundos (animación de cansado, manos en las rodillas).
+- La energía se recupera sola si dejas de entrenar.
+- El stat **Stamina** sube tu energía máxima y qué tan rápido se recupera. Así entrenar caminadora te deja entrenar más tiempo lo demás.
+- Lo que más rinde es entrenar con ritmo sin agotarte, no machacar el botón.
+
+### Estaciones
+| Estación | Cómo se juega | Da |
 |---|---|---|
-| Saco de box | Aparecen golpes (flechas o teclas) al ritmo y hay que darlos a tiempo, tipo juego de ritmo | Fuerza y Velocidad |
-| Caminadora | Mantener una barra dentro de la zona verde: si vas muy lento o muy rápido te sales | Stamina |
-| Pesas | Una barra se mueve y hay que soltar en el punto exacto; cada repetición más rápida | Fuerza y Defensa |
-| Pera de velocidad | Golpes rápidos con precisión: dar en el momento justo varias veces seguidas | Velocidad y Defensa |
+| Caminadora | Te subes y **mantienes W para correr** (en celular, el joystick hacia adelante). La cinta cambia de velocidad (lento, rápido, sprint). Si vas más lento que la cinta te vas hacia atrás y, si llegas al borde, te caes y termina la ronda. Correr al ritmo de la cinta da Stamina; los sprints dan más pero gastan más energía. | Stamina |
+| Saco de box | **Clic (o botón) para golpear**. El personaje tira golpes con animación (jab y gancho alternados, uppercut con clic derecho o botón aparte). El saco se mueve con cada golpe. Cada golpe que conecta da stats; cada golpe gasta energía. Mientras más Velocidad, más rápido salen los golpes. | Fuerza y Velocidad |
+| Pesas | **Clic por cada repetición**. El personaje levanta la mesa o la barra con animación. Hay que soltar el ritmo correcto: si das clic demasiado rápido la repetición sale mal y gasta energía sin dar nada. El peso sube con el rango. | Fuerza y Defensa |
+| Pera de velocidad | Golpes alternados **izquierda y derecha** (clic izquierdo/derecho o dos botones) siguiendo el ritmo de la pera, con animación de golpes rápidos. Mantener la racha da más. | Velocidad y Defensa |
 
-- Todo debe poder jugarse con toque en celular, no solo con teclado.
-- El servidor decide cuántos stats da cada ronda, según el resultado que valida él mismo. El cliente nunca manda "gané X de fuerza".
-- Al subir de rango se desbloquean versiones mejores de cada estación, que dan más por ronda (gym de barrio → gym amateur → gym profesional).
+- El saco y la pera usan el **mismo sistema de golpes que el combate** (mismas animaciones y la misma velocidad según tus stats). Así entrenar también es practicar para pelear, y el código se reutiliza en el ring.
+- Todo se puede jugar con teclado y mouse, y con botones en celular.
+- El servidor controla todo: cuántos golpes o repeticiones caben por segundo según tu Velocidad, la distancia al aparato, la energía y el máximo que se puede ganar por minuto. El cliente nunca manda "gané X".
+- Al subir de rango se desbloquea equipo mejor que da más por golpe o repetición (gym de barrio → gym amateur → gym profesional).
 
 ## 7. Combate
 
@@ -94,15 +103,27 @@ Cada estación es un minijuego corto (unos 15 a 30 segundos por ronda). Hacerlo 
 - Por eso el código de pelea debe ser el mismo para NPC y jugador: el NPC solo "aprieta los botones" igual que un jugador, así al quitarlo no hay que rehacer nada.
 - **PvP:** un jugador reta a otro en el ring (o entra a una fila del ring) y pelean 1 contra 1. Los puntos de rango solo cuentan si los dos son de rangos parecidos, para que nadie suba molestando a novatos.
 
+## 9b. Personaje propio que evoluciona
+- No se usan los avatares de Roblox. Todos juegan con un **boxeador del juego** (shorts, vendas o guantes, tenis).
+- Al entrar por primera vez, el jugador elige lo básico para no verse igual a todos: tono de piel, cabello, cara y color de shorts.
+- **El cuerpo crece con lo que entrenas:** más ancho de hombros y brazos con Fuerza, más definido con el total de stats. Se hace por niveles de físico (por ejemplo flaco → atlético → marcado → musculoso → bestia) ligados a los stats, para que el cambio se note.
+- Primero el crecimiento se hace con el tamaño del cuerpo (escala de brazos, torso y piernas). Lo "más definido" (marcas de músculo) necesita texturas o modelos por nivel y entra con el arte de ForgeGUI.
+- Los demás jugadores ven tu físico: es la forma de presumir cuánto has entrenado.
+
+### Animaciones
+- Golpes (jab, gancho, uppercut), guardia, esquive, correr en la caminadora, levantar pesas, golpes rápidos en la pera, cansado y KO.
+- **Plan:** al inicio las animaciones se hacen con código (moviendo las articulaciones del personaje), así no hay que subir nada a Roblox y se puede probar ya. Después se reemplazan por animaciones hechas en el editor de animación, que **tiene que subir la persona dueña** con su cuenta (Roblox solo deja usar animaciones que sean del dueño del juego). Ese cambio va en la fase de arte.
+
 ## 10. Estilo visual
-- Caricatura: colores vivos, personajes de Roblox normales con guantes y shorts, gym con ambiente divertido.
+- Caricatura: colores vivos, boxeador propio del juego (no avatares de Roblox), gym con ambiente divertido.
 - Gráficos, interfaz e imágenes con **ForgeGUI**.
 - Regla aprobada: si ForgeGUI no da modelos 3D o se acaban los créditos, los modelos del gym (saco, caminadora, pesas, ring) se hacen con bloques o se toman gratis del Creator Store (sin scripts), y ForgeGUI se usa para interfaz, íconos y texturas.
 - La interfaz va hasta el final (Fase 6): primero que todo funcione con una interfaz simple, luego se pone bonito. Todo el estilo sale de un solo módulo de tema, para cambiar el look en un solo lugar.
 
 ## 11. Alcance de la v1
 Entra:
-- Un gym con las 4 estaciones y sus minijuegos.
+- Boxeador propio con elección básica de apariencia y cuerpo que crece con los stats.
+- Un gym jugable con las 4 estaciones, energía y animaciones.
 - Los 4 stats guardados.
 - Ring con combate (5 movimientos, vida, stamina, rounds).
 - 3 rangos con tope de stats.
@@ -119,7 +140,7 @@ No entra en la v1 (ideas para después, aquí para no perderlas):
 - Más movimientos (combinaciones, golpe al cuerpo).
 
 ## 12. Monetización
-No entra en la v1. Cuando entre, la idea es solo cosmética (guantes, shorts, entradas, efectos) y quizá un boost temporal de entrenamiento. Nada que haga ganar peleas por pagar.
+No entra en la v1. Cuando entre, la idea es solo cosmética para el boxeador (guantes, shorts, cabello, tatuajes, entradas, efectos) y quizá un boost temporal de entrenamiento. Nada que haga ganar peleas por pagar.
 
 ## 13. Preguntas abiertas
 - Número máximo de jugadores por servidor (provisional: 12).

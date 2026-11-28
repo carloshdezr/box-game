@@ -1,29 +1,30 @@
 # Estado actual del proyecto
 
 ## Fase actual
-Fase 2: gym y minijuegos. Fase 1 cerrada por confirmación del dueño el 2026-11-26.
+Fase 2: boxeador propio y animaciones. El 2026-11-28 el dueño pidió un gym más jugable (W en caminadora, golpes reales con cansancio) y un personaje propio que crece; los minijuegos de barra de la versión anterior se reemplazan en la Fase 3.
 
 ## Checklist de fases
 Cada fase tiene su criterio de "terminado". No se pasa a la siguiente sin prueba manual de la persona dueña anotada aquí.
 
 - [x] **Fase 0: idea y diseño.** Criterio: `DISENO_JUEGO.md` completo. Hecho el 2026-11-26.
 - [x] **Fase 1: datos y stats.** Criterio: un jugador entra, ve sus 4 stats y su rango, y al salir y volver siguen igual. Cerrada el 2026-11-26: persistencia validada en Studio y dueño confirma que el panel se ve bien y autoriza cierre.
-- [ ] **Fase 2: gym y minijuegos.** Criterio: un mapa de gym estilo caricatura con las 4 estaciones; cada minijuego se puede jugar con teclado y con toque, y sube su stat según qué tan bien lo hiciste, sin pasar el tope del rango.
-- [ ] **Fase 3: combate contra NPC.** Criterio: en el ring puedes pelear 3 rounds contra un NPC con jab, gancho, uppercut, bloquear y esquivar; las barras de vida y stamina funcionan y la pelea termina con un ganador.
-- [ ] **Fase 4: rangos y rivales.** Criterio: ganar peleas da puntos de rango; al juntar los puntos subes de Novato a Amateur y luego a Semi-pro; cada rango tiene su rival NPC y su tope de stats.
-- [ ] **Fase 5: PvP 1 contra 1.** Criterio: dos jugadores reales pueden retarse y pelear en el ring con las mismas reglas, y el ganador recibe puntos de rango si son de rangos parecidos.
-- [ ] **Fase 6: interfaz y arte (ForgeGUI).** Criterio: HUD, minijuegos, barras de pelea y pantallas de rango con el estilo final, funcionando en PC y celular.
-- [ ] **Fase 7: prepublicación.** Criterio: los NPC ya no dan puntos de rango (solo el ring de práctica, sin puntos), el rango se sube solo con PvP; validaciones anti-trampas en servidor; prueba con dos clientes reales y en celular; lista para publicar.
+- [ ] **Fase 2: boxeador propio y animaciones.** Criterio: todos entran con el boxeador del juego (no su avatar); la primera vez eligen tono de piel, cabello, cara y color de shorts y se guarda; el cuerpo crece visiblemente con los stats (niveles de físico); hay animaciones con código de guardia, jab, gancho, uppercut, correr y cansado.
+- [ ] **Fase 3: gym jugable.** Criterio: caminadora con W y cinta que cambia de velocidad (te caes si te quedas atrás); saco con clic y golpes animados que mueven el saco; pesas con clic por repetición y ritmo; pera con golpes izquierda/derecha; barra de energía que se gasta y se recupera; stats suben según lo que haces, con límites del servidor y sin pasar el tope del rango. Se reutiliza el gym, la ocupación y el control de premios hechos antes.
+- [ ] **Fase 4: combate contra NPC.** Criterio: en el ring puedes pelear 3 rounds contra un NPC con jab, gancho, uppercut, bloquear y esquivar, usando los mismos golpes del saco; las barras de vida y stamina funcionan y la pelea termina con un ganador.
+- [ ] **Fase 5: rangos y rivales.** Criterio: ganar peleas da puntos de rango; subes de Novato a Amateur y a Semi-pro; cada rango tiene su rival NPC, su tope de stats y equipo de gym mejor.
+- [ ] **Fase 6: PvP 1 contra 1.** Criterio: dos jugadores reales pueden retarse y pelear en el ring con las mismas reglas, y el ganador recibe puntos de rango si son de rangos parecidos.
+- [ ] **Fase 7: interfaz y arte (ForgeGUI).** Criterio: HUD, barras, pantallas de rango y creador de personaje con el estilo final; animaciones definitivas subidas por el dueño; texturas de físico por nivel; funcionando en PC y celular.
+- [ ] **Fase 8: prepublicación.** Criterio: los NPC ya no dan puntos de rango (solo el ring de práctica, sin puntos), el rango se sube solo con PvP; validaciones anti-trampas en servidor; prueba con dos clientes reales y en celular; lista para publicar.
 
 Después de publicar (fuera de la v1): torneos, más rangos, cosméticos, monedas y tienda.
 
-## Checklist adicional de Fase 7
+## Checklist adicional de Fase 8 (prepublicación)
 - [ ] Desactivar API Services, comprobar «Tu progreso no se está guardando», rechazo de premios y ausencia de sobrescritura; reactivar y recuperar progreso. Trasladada desde Fase 1 por instrucción del dueño el 2026-11-26.
 
 ## Último en trabajar
 [codex] · 2026-11-26. Fase 1 cerrada por el dueño; Fase 2 implementada y sincronizada, pendiente recorrido manual. Asset 203785492 identificado como sonido del plugin Rojo.
 
-## Avance de Fase 2
+## Base ya hecha (versión anterior del gym, se reutiliza en la Fase 3)
 - [x] Gym generado desde src: entrada, piso, paredes, ring futuro marcado y ocho puestos (dos de cada tipo), con letreros de ocupación.
 - [x] ProximityPrompts y reserva servidor: una persona por puesto, una ronda por jugador; liberación por fin/cancelación, alejamiento, muerte, salida o timeout.
 - [x] Cuatro minijuegos con Espacio y botón de pantalla, Theme compartido y aviso de máximo de rango.

@@ -1,5 +1,14 @@
 # Decisiones
 
+## 2026-11-28 · [claude] · Gym jugable y boxeador propio
+- **Qué:** los minijuegos de barra ("picarle al verde") se reemplazan por entrenamiento físico: caminadora con W, saco con clic y golpes animados, pesas por repetición y pera izquierda/derecha, con una barra de Energía que se gasta y se recupera. Pedido por la persona dueña.
+- **Por qué:** se siente más a juego y menos a menú; además el saco usa el mismo sistema de golpes que el combate.
+- **Qué:** no se usan avatares de Roblox; todos usan un boxeador del juego con elección básica (piel, cabello, cara, shorts) y un cuerpo que crece por niveles según los stats. Pedido por la persona dueña; la elección básica la propuso Claude para que no todos se vean igual.
+- **Por qué:** el físico se vuelve la forma de presumir el progreso y abre cosméticos para el boxeador.
+- **Qué:** animaciones primero con código; las definitivas las sube la persona dueña en la fase de arte.
+- **Por qué:** Roblox solo deja usar animaciones que pertenezcan al dueño del juego; con código se puede probar ya sin subir nada.
+- **Qué:** se agrega la Fase 2 (boxeador y animaciones) y las demás se recorren un número. El gym, la ocupación de puestos y el control de premios ya hechos se reutilizan en la Fase 3.
+
 ## 2026-11-26 · [codex] · Fase 1 cerrada y gym de Fase 2
 - **Qué:** el dueño confirma el panel y autoriza cerrar Fase 1 hoy; la prueba con API Services deshabilitado pasa a la checklist de Fase 7. La Fase 2 queda abierta hasta su recorrido manual.
 - **Qué:** balance aprobado en esta sesión: rondas de 20 s, descanso de 5 s y máximo +4 por cada stat asociado. Configuración en `Config/Training.lua`; premio entero redondeado según resultado limitado a [0,1]. Un resultado 0 da 0. No hay progreso de rango ni combate todavía.
