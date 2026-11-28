@@ -1,5 +1,9 @@
 # Decisiones
 
+## 2026-11-28 · [claude] · Estilo final del boxeador: Roblox con toque anime
+- **Qué:** el estilo objetivo es el de `docs/referencias/estilo-objetivo.png`: cuerpo de Roblox clásico suavizado y robusto, cara de caricatura expresiva, peinado anime en picos, camiseta sin mangas, shorts, guantes grandes y tenis altos. Reemplaza las opciones de cuerpos realistas (A–D) de `CUERPOS_FASE_2.md`.
+- **Por qué:** la persona dueña vio las capturas y prefiere la mezcla Roblox + anime que se ve en los juegos de Roblox, no anatomía realista.
+
 ## 2026-11-28 · [codex] · Fase 2 dividida y comparación de catálogo
 - **Qué:** por instrucción del dueño, Parte A solo compara cuerpos; no cambia BoxerRig ni animaciones. Parte B exige su elección previa. Se proponen cuatro opciones con capturas reales: Glenn (984), Athletic Muscle Man (594501), Athletic Muscle Body de adidas (98889867899884), Superhero (299). Cabeza/cabello Glenn comunes para comparar silueta, shorts rojos de catálogo y vendas provisionales.
 - **Por qué:** la primera implementación fue rechazada visualmente; una captura concreta permite elegir antes de rehacer código. Oliver se descartó por chaqueta integrada, Action Figure por shorts deformados y Man por forma demasiado cuadrada. Las escalas y quinto candidato Bestia en CUERPOS_FASE_2 son propuestas, no decisiones aprobadas ni Config implementada.

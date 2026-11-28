@@ -1,5 +1,12 @@
 # Bitácora
 
+## 2026-11-28 03:05 · [claude] · Diseño
+- Qué hice: guardé la imagen de referencia del estilo que quiere la persona dueña (`docs/referencias/estilo-objetivo.png`) y actualicé diseño y decisiones: Roblox clásico suavizado con toque anime. Las opciones A–D quedan descartadas.
+- Archivos tocados: `docs/referencias/estilo-objetivo.png`, `docs/DISENO_JUEGO.md`, `docs/DECISIONES.md`, `docs/BITACORA.md`.
+- Cómo probarlo: abrir la imagen de referencia.
+- Qué quedó mal o pendiente: proponer cuerpo, caras, peinados, ropa y progresión con ese estilo (Parte A de nuevo).
+- Siguiente paso recomendado: capturas de prueba comparadas con la referencia.
+
 ## 2026-11-28 02:53 · [codex] · Fase 2, Parte A
 - Qué hice: git pull origin main trajo 9847fba; leí AGENTS, estado, últimas tres entradas, decisiones, sección 9b y grafo. Preparé cuatro opciones finales de cuerpo de catálogo con HumanoidDescription y capturas reales: A Glenn, B Athletic Muscle Man, C Athletic Muscle Body de adidas, D Superhero. Cabeza/cara y cabello Glenn comunes, shorts rojos de catálogo y cobertura blanca provisional en manos. Propuse un cuerpo distinto/escala para cada físico; quinto candidato Bestia aún sin prueba visual. Descarté Oliver (chaqueta), Action Figure (shorts deformados) y Man (cuadrado). No cambié código del juego ni empecé Parte B.
 - Archivos tocados: docs/{CUERPOS_FASE_2,ESTADO,DECISIONES,BITACORA}.md y cuatro capturas en docs/referencias/fase2-a/. Sonda temporal src/ReplicatedStorage/RojoConnectionProbe.model.json creada y retirada para validar Rojo; no queda en el commit. Grafo regenerado code-only por incorporación de documentos/capturas; estructura del código sin cambios.

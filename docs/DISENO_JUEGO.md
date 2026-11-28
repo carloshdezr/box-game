@@ -107,8 +107,8 @@ El gym no son minijuegos de "picarle al verde": tu personaje entrena de verdad y
 - No se usan los avatares de Roblox. Todos juegan con un **boxeador del juego** (shorts, vendas o guantes, tenis).
 - Al entrar por primera vez, el jugador elige lo básico para no verse igual a todos: tono de piel, cabello, cara y color de shorts.
 - **El cuerpo crece con lo que entrenas:** más ancho de hombros y brazos con Fuerza, más definido con el total de stats. Se hace por niveles de físico (por ejemplo flaco → atlético → marcado → musculoso → bestia) ligados a los stats, para que el cambio se note.
-- **Aspecto (cambio del 2026-11-28):** nada de cuerpo de bloques hecho con piezas. El boxeador se arma como un avatar moderno de Roblox, con cuerpo redondeado de malla (curvas, cabeza con cara expresiva), usando piezas del catálogo de Roblox (cuerpos, cabello, caras) cargadas con HumanoidDescription. Cualquier artículo del catálogo se puede usar así.
-- **Físico por niveles:** cada nivel usa un cuerpo del catálogo distinto (de delgado a musculoso) más ajustes de escala (ancho, proporción y tipo de cuerpo). Así lo "más definido" se ve de verdad, no solo más grande.
+- **Aspecto:** ver estilo objetivo en la sección 10. El boxeador se arma con HumanoidDescription y artículos del catálogo de Roblox (cuerpo, cabello, cara, ropa), no con piezas de bloque sueltas.
+- **Físico por niveles:** el mismo cuerpo estilo Roblox crece con escala (hombros, brazos y torso más anchos) y, si hay piezas del mismo estilo, con brazos y torso más musculosos por nivel. Debe sentirse el mismo personaje creciendo.
 - Los demás jugadores ven tu físico: es la forma de presumir cuánto has entrenado.
 
 ### Animaciones
@@ -117,7 +117,7 @@ El gym no son minijuegos de "picarle al verde": tu personaje entrena de verdad y
 - Opción extra: grabarse a sí mismo haciendo los movimientos y usar la función de animación desde video del editor de animación de Studio, si está disponible, y que la IA la limpie.
 
 ## 10. Estilo visual
-- Estilo Roblox moderno: personajes redondeados como los avatares actuales (no de bloques), colores vivos, boxeador propio del juego, gym con ambiente divertido.
+- **Estilo objetivo (2026-11-28): Roblox con toque anime.** Referencia: `docs/referencias/estilo-objetivo.png`. Cuerpo de Roblox clásico pero suavizado (orillas redondeadas, proporciones chaparritas y robustas, manos y guantes grandes), cara de caricatura expresiva, peinado anime en picos, camiseta sin mangas, shorts de box, guantes de verdad y tenis altos de bota. Colores vivos. No es realista ni de malla con anatomía detallada.
 - Gráficos, interfaz e imágenes con **ForgeGUI**.
 - Regla aprobada: si ForgeGUI no da modelos 3D o se acaban los créditos, los modelos del gym (saco, caminadora, pesas, ring) se hacen con bloques o se toman gratis del Creator Store (sin scripts), y ForgeGUI se usa para interfaz, íconos y texturas.
 - La interfaz va hasta el final (Fase 6): primero que todo funcione con una interfaz simple, luego se pone bonito. Todo el estilo sale de un solo módulo de tema, para cambiar el look en un solo lugar.
