@@ -1,7 +1,7 @@
 # Estado actual del proyecto
 
 ## Fase actual
-Fase 2: boxeador propio y animaciones implementados el 2026-11-28, pendientes de prueba manual del dueño. Los minijuegos actuales no se modificaron; se reemplazan en Fase 3.
+Fase 2 en revisión por el cambio de diseño del 2026-11-28. **Parte A preparada: cuatro cuerpos de catálogo con capturas y propuesta de progresión, pendientes de elección del dueño. Parte B no iniciada.** El rig de bloques y las poses procedurales anteriores siguen en producción hasta esa elección. Minijuegos intactos; se reemplazan en Fase 3.
 
 ## Checklist de fases
 Cada fase tiene su criterio de "terminado". No se pasa a la siguiente sin prueba manual de la persona dueña anotada aquí.
@@ -22,9 +22,18 @@ Después de publicar (fuera de la v1): torneos, más rangos, cosméticos, moneda
 - [ ] Desactivar API Services, comprobar «Tu progreso no se está guardando», rechazo de premios y ausencia de sobrescritura; reactivar y recuperar progreso. Trasladada desde Fase 1 por instrucción del dueño el 2026-11-26.
 
 ## Último en trabajar
-[codex] · 2026-11-28. Boxeador R15 propio, apariencia persistida, físico por stats y animaciones por articulaciones. Validaciones rápidas de 50 s y 44 s en el placeId autorizado; falta recorrido manual.
+[codex] · 2026-11-28 02:53. Parte A: capturas A Glenn, B Athletic Muscle Man, C Athletic Muscle Body de adidas, D Superhero. Comparación/propuesta en `docs/CUERPOS_FASE_2.md`. Rojo reconectado y sincronización de creación/retirada verificada en 127.0.0.1:34872.
+
+## Rehacer Fase 2 (diseño de malla y KeyframeSequence)
+- [x] Parte A: cuerpos redondeados del catálogo cargados con HumanoidDescription, cabeza con cara, shorts y cobertura provisional de vendas. Cuatro capturas reales en `docs/referencias/fase2-a/`.
+- [x] Propuesta de cuerpos distintos y escala para los cinco niveles en `docs/CUERPOS_FASE_2.md`; Bestia es candidato adicional con ficha consultada, sin validación visual todavía.
+- [x] Diagnóstico de Rojo: fallos ConnectFail previos a localhost; conexión actual a 127.0.0.1 confirmada mediante sonda temporal creada/retirada automáticamente. No cambiaron scripts del juego.
+- [ ] Dueño elige A/B/C/D y aprueba o ajusta la progresión. No avanzar a Parte B hasta recibir esa elección.
+- [ ] Parte B: BoxerRig con HumanoidDescription, compatibilidad de apariencia guardada, seis KeyframeSequence con peso/anticipación y `docs/SUBIR_ANIMACIONES.md`.
+- [ ] Aprobación visual/manual del dueño antes de cerrar Fase 2.
 
 ## Avance de Fase 2: boxeador y animaciones
+Histórico de la primera implementación: las comprobaciones siguientes no satisfacen el criterio nuevo de mallas y KeyframeSequence.
 - [x] R15 propio generado desde el repo: shorts, vendas, tenis, cabello y cara de bloques; ningún avatar personal ni asset/animación subido.
 - [x] Creador con vista previa y tres opciones por campo en Config/Appearance; servidor valida y PlayerDataService guarda inmediatamente y en sus guardados habituales. Registros v1 sin apariencia siguen siendo compatibles; no se sobrescriben registros inválidos.
 - [x] Cinco niveles en Config/Physique: promedios 1/25/75/150/300 aprobados por el dueño; tamaño adicional de brazos/hombros por Fuerza. Cambios de tamaño en servidor replicados en vivo.
@@ -65,8 +74,9 @@ Después de publicar (fuera de la v1): torneos, más rangos, cosméticos, moneda
 - El ejecutable `rojo` en PATH es un shim de Rokit sin manifiesto; el sourcemap pasó usando el binario instalado de Rojo 7.7.1 directamente.
 
 ## Siguiente paso
-El dueño realiza `docs/PRUEBA_FASE_2.md` y registra fecha/resultados antes de cerrar Fase 2. No iniciar el gym jugable/Fase 3 todavía. Studio quedó en Edit y stats en 1; Rojo continúa en localhost:34872. La cuenta de pruebas conserva piel Media, Cresta, Sonrisa y shorts Azules. La prueba sin API Services corresponde a Fase 8 tras la renumeración del diseño.
+El dueño elige A/B/C/D en `docs/CUERPOS_FASE_2.md` y confirma o ajusta la progresión; después se implementa Parte B. La guía PRUEBA_FASE_2 anterior se actualizará al implementar el nuevo rig. Studio quedó en Edit, sin modelos temporales; cámara/FOV restaurados. Rojo conectado en 127.0.0.1:34872. No se modificó el progreso ni la apariencia guardada. No iniciar Fase 3. La prueba sin API Services sigue en Fase 8.
 
 ## Preguntas pendientes
+- Elección visual A/B/C/D y aprobación de la progresión propuesta en CUERPOS_FASE_2; requisito explícito del dueño antes de Parte B.
 - Jugadores por servidor (provisional 12).
 - Nombre definitivo del juego.

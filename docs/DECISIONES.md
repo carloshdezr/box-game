@@ -1,5 +1,12 @@
 # Decisiones
 
+## 2026-11-28 · [codex] · Fase 2 dividida y comparación de catálogo
+- **Qué:** por instrucción del dueño, Parte A solo compara cuerpos; no cambia BoxerRig ni animaciones. Parte B exige su elección previa. Se proponen cuatro opciones con capturas reales: Glenn (984), Athletic Muscle Man (594501), Athletic Muscle Body de adidas (98889867899884), Superhero (299). Cabeza/cabello Glenn comunes para comparar silueta, shorts rojos de catálogo y vendas provisionales.
+- **Por qué:** la primera implementación fue rechazada visualmente; una captura concreta permite elegir antes de rehacer código. Oliver se descartó por chaqueta integrada, Action Figure por shorts deformados y Man por forma demasiado cuadrada. Las escalas y quinto candidato Bestia en CUERPOS_FASE_2 son propuestas, no decisiones aprobadas ni Config implementada.
+- **Qué:** mantener intacta la apariencia persistida durante la comparación. Las previews se generaron temporalmente por MCP en el placeId autorizado y se retiraron al capturarlas; solo documentos/capturas quedan en el repo. No se subió, compró ni publicó ningún asset.
+- **Rojo:** log con ConnectFail a localhost:34872; servidor actual accesible. Tras reconectar con 127.0.0.1 se verificó sincronización de ida mediante creación y retirada de una sonda StringValue temporal. No hay evidencia suficiente para atribuir el fallo anterior específicamente a IPv6; sí queda comprobada la conexión funcional actual.
+- **Compatibilidad:** los rigs de catálogo actuales usan AnimationConstraint; Parte B debe usar Animator/KeyframeSequence sobre esos joints. La ropa clásica de vendas no aparece igual en todos los cuerpos; su ajuste final y las opciones de catálogo deben validarse después de la elección.
+
 ## 2026-11-28 · [claude] · Personaje de malla y animaciones de verdad
 - **Qué:** el boxeador deja de armarse con piezas de bloque y pasa a ser un avatar moderno de Roblox (cuerpo de malla redondeado, cabeza con cara) armado con HumanoidDescription y artículos del catálogo. El físico por niveles cambia de cuerpo del catálogo además de la escala.
 - **Por qué:** la persona dueña probó la Fase 2 y lo vio genérico; quiere que parezca personaje de Roblox, con curvas, no cuadrado.
